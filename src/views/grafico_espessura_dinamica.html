@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="css/styles.css") }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     
     <body>
@@ -13,39 +13,39 @@
             <a href="/arquivocoaxial" class="btn">Coaxial</a>
             <a href="/gerarxml" class="btn">Gerar XML</a>
             <div class="images">
-                <img src="{{ url_for("static", filename="images/logoINPE.png") }}" alt="Logotipo do INPE">
-                <img src="{{ url_for("static", filename="images/logoFATEC.png") }}" alt="Logotipo da FATEC Taubate">
+                <img src="{{ url_for('static', filename='images/logoINPE.png') }}" alt="Logotipo do INPE">
+                <img src="{{ url_for('static', filename='images/logoFATEC.png') }}" alt="Logotipo da FATEC Taubate">
             </div>
         </header>
     
         <img src=\'data:image/png;base64,{encoded}\'>
-        <form action=f"{rota_grafico}" method="post">
-            'Espessura mínima em mm: <input type="number" name="inicio_slider" step="any" value={{inicio_slider}} required="true"><br>
-            'Espessura máxima em mm: <input type="number" name="fim_slider" step="any" value={{fim_slider}} required="true"><br>
-            <input type="hidden" name="hash_arquivo" value={{hash_arquivo}}>
-            <input type="hidden" name="csv_filename" value={{csv_filename}}>
-            <input type="hidden" name="txt_filename" value={{nome_arquivo_txt}}>
-            <input type="hidden" name="undfrequencia" value={{undfrequencia}}>
+        <form action= "{{ rota_grafico }}" method="post">
+            'Espessura mínima em mm: <input type="number" name="inicio_slider" step="any" value="{{ inicio_slider }}" required="true"><br>
+            'Espessura máxima em mm: <input type="number" name="fim_slider" step="any" value="{{ fim_slider }}" required="true"><br>
+            <input type="hidden" name="hash_arquivo" value="{{ hash_arquivo }}">
+            <input type="hidden" name="csv_filename" value="{{ csv_filename }}">
+            <input type="hidden" name="txt_filename" value="{{ nome_arquivo_txt }}">
+            <input type="hidden" name="undfrequencia" value="{{ undfrequencia }}">
             <input type="hidden" name="baixar_grafico" value="0">
-            <input type="range" id="espamostra" name="espamostra" min={{inicio_slider * 1e-3}} max={{fim_slider * 1e-3}} step="0.000001" value={{espamostra}} onchange=submit()>
-            <label for="espamostra">Espessura: {{espamostra}} m</label>
+            <input type="range" id="espamostra" name="espamostra" min="{{ inicio_slider * 1e-3 }}" max="{{ fim_slider * 1e-3 }}" step="0.000001" value="{{ espamostra }}" onchange=submit()>
+            <label for="espamostra">Espessura: {{ espamostra }} m</label>
         </form>
 
-        f<form action="{rota_grafico}" method="post">
-            <input type="hidden" name="inicio_slider" value={{inicio_slider}}>
-            <input type="hidden" name="fim_slider" value={{fim_slider}}>
-            <input type="hidden" name="hash_arquivo" value={{hash_arquivo}}>
-            <input type="hidden" name="csv_filename" value={{csv_filename}}>
-            <input type="hidden" name="txt_filename" value={{nome_arquivo_txt}}>
-            <input type="hidden" name="undfrequencia" value={{undfrequencia}}>
-            <input type="hidden" name="espamostra" value={{espamostra}}>
+        <form action="{{ rota_grafico }}" method="post">
+            <input type="hidden" name="inicio_slider" value="{{ inicio_slider }}">
+            <input type="hidden" name="fim_slider" value="{{ fim_slider }}">
+            <input type="hidden" name="hash_arquivo" value="{{ hash_arquivo }}">
+            <input type="hidden" name="csv_filename" value="{{ csv_filename }}">
+            <input type="hidden" name="txt_filename" value="{{ nome_arquivo_txt }}">
+            <input type="hidden" name="undfrequencia" value="{{ undfrequencia }}">
+            <input type="hidden" name="espamostra" value="{{ espamostra }}">
             <input type="hidden" name="baixar_grafico" value="1">
             <button type="submit">Baixar dados do gráfico</button>
         </form>
 
-        f<form action="{rota_informacoes}" method="post">
-            <input type="hidden" name="hash_arquivo" value={{hash_arquivo}}>
-            <input type="hidden" name="csv_filename" value={{csv_filename}}>
+        <form action="{{ rota_informacoes }}" method="post">
+            <input type="hidden" name="hash_arquivo" value="{{ hash_arquivo }}">
+            <input type="hidden" name="csv_filename" value="{{ csv_filename }}">
             <button type="submit">Retornar ao menu</button>
         </form>
         
