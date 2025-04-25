@@ -20,35 +20,31 @@ class DadosVna:
         except Exception as e:
             print(f"Erro ao ler o arquivo csv: {e}")
 
-        # Valores do cabeçalho
         frequencia_corte = conteudo_arquivo_csv[7]
         unidade_da_frequencia = frequencia_corte[28:31]
         frequencia_corte = float(frequencia_corte[19:28])
-        # print('Frequência de Corte: %.2f'%frequencia_corte)
-        # print('Unidade Frequência de Corte: ' + unidade_da_frequencia)
+
+        # Offset da amostra
         comprimento_suporte_da_amostra = conteudo_arquivo_csv[8]
         comprimento_suporte_da_amostra = float(
             comprimento_suporte_da_amostra[22:31]
         )
-        # print('Comprimento do suporte da amostra (Offset): %.2f'%comprimento_suporte_da_amostra)
+
         distancia_da_amostra = conteudo_arquivo_csv[9]
         distancia_da_amostra = float(distancia_da_amostra[21:29])
-        # print('Distância da amostra: %.2f'%distancia_da_amostra)
+
         espessura_da_amostra = conteudo_arquivo_csv[10]
         espessura_da_amostra = float(espessura_da_amostra[19:27])
         ifbw = conteudo_arquivo_csv[11]
         ifbw = float(ifbw[7:18])
-        # print('IFBW: %.2f'%ifbw)
+
         power = conteudo_arquivo_csv[12]
         power = float(power[8:16])
-        # print('Power: %.2f'%power)
+
         frequencia_inicial = conteudo_arquivo_csv[15]
         frequencia_inicial = float(frequencia_inicial[0:15])
         frequencia_final = conteudo_arquivo_csv[1615]
         frequencia_final = float(frequencia_final[0:15])
-        # ESCOLHA A BANDA-------------------
-        # print('Frequencia inicial: %.2f'%frequencia_inicial)
-        # print('Frequencia final: %.2f'%frequencia_final)
         nome_banda = "Não reconhecida"
         if frequencia_inicial >= 8 and frequencia_final <= 12.4:
             nome_banda = "Banda X"
@@ -58,7 +54,7 @@ class DadosVna:
             nome_banda = "Banda K"
         if frequencia_inicial >= 26 and frequencia_final <= 40:
             nome_banda = "Banda Ka"
-        # Fim Valores do cabeçalho
+
         txt_filename = f"mm_{self.__hash_arquivo}.txt"
 
         with open(
@@ -83,3 +79,6 @@ class DadosVna:
             nome_banda,
             unidade_da_frequencia,
         ]
+
+    def gerar_arquivo_txt(self):
+        pass
