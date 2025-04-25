@@ -14,9 +14,8 @@ class DadosVna:
 
     def ler_csv(self):
         try:
-            arquivo_csv = open(self.__caminho_arquivo_csv, "r")
-            conteudo_arquivo_csv = arquivo_csv.readlines()
-            arquivo_csv.close()
+            with open(self.__caminho_arquivo_csv, "r") as arquivo_csv:
+                conteudo_arquivo_csv = arquivo_csv.readlines()
         except Exception as e:
             print(f"Erro ao ler o arquivo csv: {e}")
 
