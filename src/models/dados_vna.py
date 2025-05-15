@@ -19,31 +19,18 @@ class DadosVna:
         except Exception as e:
             print(f"Erro ao ler o arquivo csv: {e}")
 
-        frequencia_corte = conteudo_arquivo_csv[7]
-        unidade_da_frequencia = frequencia_corte[28:31]
-        frequencia_corte = float(frequencia_corte[19:28])
+        frequencia_corte = float(conteudo_arquivo_csv[7][19:28])
+        unidade_frequencia = conteudo_arquivo_csv[7][28:31]
 
-        # Offset da amostra
-        comprimento_suporte_da_amostra = conteudo_arquivo_csv[8]
-        comprimento_suporte_da_amostra = float(
-            comprimento_suporte_da_amostra[22:31]
-        )
+        # Comprimento do suporte da amostra = Offset da amostra
+        comprimento_suporte_amostra = float(conteudo_arquivo_csv[8][22:31])
+        distancia_amostra = float(conteudo_arquivo_csv[9][21:29])
+        espessura_amostra = float(conteudo_arquivo_csv[10][19:27])
+        ifbw = float(conteudo_arquivo_csv[11][7:18])
+        power = float(conteudo_arquivo_csv[12][8:16])
+        frequencia_inicial = float(conteudo_arquivo_csv[15][:15])
+        frequencia_final = float(conteudo_arquivo_csv[1615][0:15])
 
-        distancia_da_amostra = conteudo_arquivo_csv[9]
-        distancia_da_amostra = float(distancia_da_amostra[21:29])
-
-        espessura_da_amostra = conteudo_arquivo_csv[10]
-        espessura_da_amostra = float(espessura_da_amostra[19:27])
-        ifbw = conteudo_arquivo_csv[11]
-        ifbw = float(ifbw[7:18])
-
-        power = conteudo_arquivo_csv[12]
-        power = float(power[8:16])
-
-        frequencia_inicial = conteudo_arquivo_csv[15]
-        frequencia_inicial = float(frequencia_inicial[0:15])
-        frequencia_final = conteudo_arquivo_csv[1615]
-        frequencia_final = float(frequencia_final[0:15])
         nome_banda = "Não reconhecida"
         if frequencia_inicial >= 8 and frequencia_final <= 12.4:
             nome_banda = "Banda X"
@@ -69,14 +56,14 @@ class DadosVna:
 
         return [
             txt_filename,
-            comprimento_suporte_da_amostra,
+            comprimento_suporte_amostra,
             frequencia_corte,
-            distancia_da_amostra,
-            espessura_da_amostra,
+            distancia_amostra,
+            espessura_amostra,
             ifbw,
             power,
             nome_banda,
-            unidade_da_frequencia,
+            unidade_frequencia,
         ]
 
     def gerar_arquivo_txt(self):
