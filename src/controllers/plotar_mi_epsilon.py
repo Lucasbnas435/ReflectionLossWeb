@@ -32,9 +32,7 @@ def plotar_mi_epsilon(
     plt.xlabel(f"Frequência ({undfrequencia})")
     plt.ylabel("Permissividade Elétrica Relativa (\u03b5\u1d63)")
     plt.title(
-        "Arquivo: "
-        + csv_filename
-        + "\nGráfico \u03b5' vs. \u03b5'' em função da Frequência"
+        f"Arquivo: {csv_filename}\nGráfico \u03b5' vs. \u03b5'' em função da Frequência"
     )
     plt.legend()
     plt.grid(True)
@@ -47,9 +45,7 @@ def plotar_mi_epsilon(
     plt.xlabel(f"Frequência ({undfrequencia})")
     plt.ylabel("Permeabilidade Magnética Relativa (\u00b5\u1d63)")
     plt.title(
-        "Arquivo: "
-        + csv_filename
-        + "\nGráfico \u00b5' vs. \u00b5'' em função da Frequência"
+        f"Arquivo: {csv_filename}\nGráfico \u00b5' vs. \u00b5'' em função da Frequência"
     )
     plt.legend()
     plt.grid(True)
