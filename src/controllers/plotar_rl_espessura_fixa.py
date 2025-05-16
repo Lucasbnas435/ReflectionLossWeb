@@ -27,9 +27,9 @@ def plotar_rl_espessura_fixa(
 
     # Vetores - 2
     er_r = []  # permissividade real
-    er_i = []  # permissividade imag
+    er_i = []  # permissividade imaginaria
     ur_r = []  # permeabilidade real
-    ur_i = []  # permeabilidade imag
+    ur_i = []  # permeabilidade imaginaria
 
     EX = []
     UX = []
@@ -60,16 +60,11 @@ def plotar_rl_espessura_fixa(
         # Calcular impedância de entrada
         z = (50 * (UX[n] / EX[n]) ** (1.0 / 2.0)) * np.tanh(
             1j * (2 * np.pi * d * f / c) * ((UX[n] * EX[n]) ** (1.0 / 2.0))
-        )  # COM TANH
-        # Passar para S11(dB)
+        )
         db = -20 * np.log10(
             abs((z - 50) / (z + 50))
-        )  # dB #somente para voltagem
-        # db = -20*np.log10(abs((z-50)/(z+50))) #dB para potência
-        # Passar para Lienar Mag S11 (%)
-        # s11_curto = (10.0**((db/10.0))) # a.u
-        # s11_v.append(s11_curto*100)# LINEAR
-        s11_v.append(round(db, 5))  # dB
+        )  # [dB] somente para voltagem
+        s11_v.append(round(db, 5))
 
     if baixar_grafico:
         # Colocar comando para retornar arquivo
