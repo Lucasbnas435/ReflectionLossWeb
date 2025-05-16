@@ -13,6 +13,18 @@ class DadosVna:
         )
         self.__caminho_arquivo_txt = f"./pythonPaginaINPE/static/files/txt_gerado/mm_{self.__hash_arquivo}.txt"
 
+    @property
+    def hash_arquivo(self):
+        return self.__hash_arquivo
+
+    @property
+    def caminho_arquivo_csv(self):
+        return self.__caminho_arquivo_csv
+
+    @property
+    def caminho_arquivo_txt(self):
+        return self.__caminho_arquivo_txt
+
     def ler_csv(self):
         try:
             with open(self.__caminho_arquivo_csv, "r") as arquivo_csv:
