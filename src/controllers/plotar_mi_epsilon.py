@@ -5,8 +5,8 @@ from flask import render_template
 
 def plotar_mi_epsilon(
     hash_arquivo: str,
-    csv_filename: str,
-    undfrequencia: str,
+    nome_arquivo_csv: str,
+    unidade_frequencia: str,
     coaxial: bool = False,
 ):
     try:
@@ -29,10 +29,10 @@ def plotar_mi_epsilon(
     ax = fig.add_subplot(1, 2, 1)
     plt.plot(frequencia, e, label="\u03b5'")
     plt.plot(frequencia, e_prime, label="\u03b5''")
-    plt.xlabel(f"Frequência ({undfrequencia})")
+    plt.xlabel(f"Frequência ({unidade_frequencia})")
     plt.ylabel("Permissividade Elétrica Relativa (\u03b5\u1d63)")
     plt.title(
-        f"Arquivo: {csv_filename}\nGráfico \u03b5' vs. \u03b5'' em função da Frequência"
+        f"Arquivo: {nome_arquivo_csv}\nGráfico \u03b5' vs. \u03b5'' em função da Frequência"
     )
     plt.legend()
     plt.grid(True)
@@ -42,10 +42,10 @@ def plotar_mi_epsilon(
     ax = fig.add_subplot(1, 2, 2)
     plt.plot(frequencia, u, label="\u00b5'")
     plt.plot(frequencia, u_prime, label="\u00b5''")
-    plt.xlabel(f"Frequência ({undfrequencia})")
+    plt.xlabel(f"Frequência ({unidade_frequencia})")
     plt.ylabel("Permeabilidade Magnética Relativa (\u00b5\u1d63)")
     plt.title(
-        f"Arquivo: {csv_filename}\nGráfico \u00b5' vs. \u00b5'' em função da Frequência"
+        f"Arquivo: {nome_arquivo_csv}\nGráfico \u00b5' vs. \u00b5'' em função da Frequência"
     )
     plt.legend()
     plt.grid(True)
