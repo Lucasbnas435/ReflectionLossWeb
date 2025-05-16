@@ -5,14 +5,13 @@ from flask import render_template
 
 def plotar_mi_epsilon(
     hash_arquivo: str,
+    caminho_arquivo_txt: str,
     nome_arquivo_csv: str,
     unidade_frequencia: str,
     coaxial: bool = False,
 ):
     try:
-        dados = np.loadtxt(
-            f"./pythonPaginaINPE/static/files/txt_gerado/mm_{hash_arquivo}.txt"
-        )
+        dados = np.loadtxt(caminho_arquivo_txt)
     except Exception as e:
         print(f"Erro ao recuperar arquivo txt para plotar mi e epsilon: {e}")
         raise
