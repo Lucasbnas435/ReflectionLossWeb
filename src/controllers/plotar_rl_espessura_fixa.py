@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import matplotlib.pyplot as plt
 from flask import render_template
 
@@ -45,9 +47,9 @@ def plotar_rl_espessura_fixa(
     plt.ylabel("Perda por Reflexão (dB)")
     plt.title(f"Arquivo: {nome_arquivo_csv}")
 
-    caminho_imagem = (
-        f"./pythonPaginaINPE/static/images/rl_epessura_fixa_{hash_arquivo}.png"
-    )
+    nome_arquivo_imagem = f"rl_epessura_fixa_{hash_arquivo}.png"
+
+    caminho_imagem = f"./pythonPaginaINPE/static/images/{nome_arquivo_imagem}"
     fig.savefig(caminho_imagem)
 
     rota_grafico = "/reflectionlossespfixa"
@@ -60,6 +62,8 @@ def plotar_rl_espessura_fixa(
         "rota_grafico": rota_grafico,
         "rota_informacoes": rota_informacoes,
         "caminho_imagem": caminho_imagem,
+        "nome_arquivo_imagem": nome_arquivo_imagem,
+        "time": datetime.now().timestamp(),  # usado para cache busting
     }
 
     return render_template("grafico_espessura_fixa.html", **dados_view)
