@@ -1,7 +1,9 @@
 import numpy as np
 
 
-def calcular_rl(conteudo_arquivo_txt: list[str], espessura_amostra: float):
+def calcular_rl(
+    conteudo_arquivo_txt: list[str], espessura_amostra: float
+) -> tuple[list[float], list[float]]:
     # Ajuste da Referencia de L1 e L2
     # [m] Espessura da amostra (Livro chama de L)
     d = espessura_amostra * 1e-3
@@ -62,3 +64,5 @@ def calcular_rl(conteudo_arquivo_txt: list[str], espessura_amostra: float):
             abs((z - 50) / (z + 50))
         )  # [dB] somente para voltagem
         s11_v.append(round(db, 5))
+
+    return frequencias, s11_v
