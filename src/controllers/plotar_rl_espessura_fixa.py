@@ -7,9 +7,9 @@ def plotar_rl_espessura_fixa(
     nome_arquivo_csv: str,
     caminho_arquivo_txt: str,
     unidade_frequencia: str,
-    espessura_amostra: str,
-    baixar_grafico: str,
     hash_arquivo: str,
+    espessura_amostra: float,
+    baixar_grafico: bool,
     coaxial: bool = False,
 ):
     with open(caminho_arquivo_txt, "r") as arquivo_txt:
@@ -17,7 +17,7 @@ def plotar_rl_espessura_fixa(
 
     # Ajuste da Referencia de L1 e L2
     # [m] Espessura da amostra (Livro chama de L)
-    d = float(espessura_amostra) * 1e-3
+    d = espessura_amostra * 1e-3
 
     # CONSTANTES
     c = 2.998e8  # [m/s] #velocidade da Luz no vacuo
