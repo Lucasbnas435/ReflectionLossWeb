@@ -15,6 +15,7 @@ def plotar_rl_espessura_fixa(
     with open(caminho_arquivo_txt, "r") as arquivo_txt:
         conteudo_arquivo_txt = arquivo_txt.readlines()
 
+    # Ajuste da Referencia de L1 e L2
     # [m] Espessura da amostra (Livro chama de L)
     d = float(espessura_amostra) * 1e-3
 
