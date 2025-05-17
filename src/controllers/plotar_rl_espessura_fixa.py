@@ -30,10 +30,9 @@ def plotar_rl_espessura_fixa(
             # Título
             arquivo_dados_grafico.write(f"Freq {unidade_frequencia} RL(dB)")
             # Dados do gráfico
-            for i in range(len(frequencias)):
-                arquivo_dados_grafico.write(
-                    f"{frequencias[i]:.2f} {s11_v[i]:.2f}"
-                )
+            for frequencia, rl in zip(frequencias, s11_v):
+                arquivo_dados_grafico.write(f"{frequencia:.2f} {rl:.2f}")
+
         return f"mm_{round(espessura_amostra, 2)}mm.txt"
 
     # Plotando grafico
