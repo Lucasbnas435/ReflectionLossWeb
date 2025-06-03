@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, session
 from werkzeug.utils import secure_filename
 
 from src.forms.upload_file_form import UploadFileForm
@@ -21,18 +21,18 @@ def arquivoumacamada():
     form = UploadFileForm()
     if form.validate_on_submit():
         file = form.file.data
-        hash_arquivo = gerar_identificador()
+        identificador_arquivo = gerar_identificador()
         file.save(
             os.path.join(
                 os.path.abspath(os.path.dirname(__file__)),
                 app.config["UPLOAD_FOLDER"],
-                secure_filename(f"{hash_arquivo}.csv"),
+                secure_filename(f"{identificador_arquivo}.csv"),
             )
         )
         csv_filename = file.filename
         return render_template(
             "redirecionar.html",
-            hash_arquivo=hash_arquivo,
+            identificador_arquivo=identificador_arquivo,
             csv_filename=csv_filename,
         )
     return render_template("arquivo_uma_camada.html", form=form)
@@ -42,7 +42,7 @@ def arquivoumacamada():
 def informacoes():
     try:
         csv_filename = request.form.get("csv_filename")
-        hash_arquivo = request.form.get("hash_arquivo")
+        identificador_arquivo = request.form.get("identificador_arquivo")
         (
             txt_filename,
             compsuporteamostra,
@@ -53,7 +53,7 @@ def informacoes():
             power,
             nome_banda,
             undfrequencia,
-        ) = read_csv(hash_arquivo)
+        ) = read_csv(identificador_arquivo)
         read_txt(txt_filename)
 
         return render_template(
@@ -68,7 +68,7 @@ def informacoes():
             power=power,
             nome_banda=nome_banda,
             undfrequencia=undfrequencia,
-            hash_arquivo=hash_arquivo,
+            identificador_arquivo=identificador_arquivo,
         )
     except:
         return render_template("error_template.html")
@@ -77,7 +77,7 @@ def informacoes():
 @app.route("/grafico/rl-espessura-fixa", methods=["POST"])
 def reflectionlossespfixa():
     try:
-        hash_arquivo = request.form.get("hash_arquivo")
+        identificador_arquivo = request.form.get("identificador_arquivo")
         csv_filename = request.form.get("csv_filename")
         txt_filename = request.form.get("txt_filename")
         undfrequencia = request.form.get("undfrequencia")
@@ -91,10 +91,10 @@ def reflectionlossespfixa():
                 undfrequencia,
                 espamostra,
                 baixar_grafico,
-                hash_arquivo,
+                identificador_arquivo,
             )
             return send_file(
-                f"./static/files/saidas/saidas_{hash_arquivo}/{filename}",
+                f"./static/files/saidas/saidas_{identificador_arquivo}/{filename}",
                 as_attachment=True,
             )
 
@@ -104,7 +104,7 @@ def reflectionlossespfixa():
             undfrequencia,
             espamostra,
             baixar_grafico,
-            hash_arquivo,
+            identificador_arquivo,
         )
         return render_template(
             nome_template,
@@ -112,7 +112,7 @@ def reflectionlossespfixa():
             nome_arquivo_txt=txt_filename,
             undfrequencia=undfrequencia,
             espamostra=espamostra,
-            hash_arquivo=hash_arquivo,
+            identificador_arquivo=identificador_arquivo,
         )
     except:
         return render_template("error_template.html")
