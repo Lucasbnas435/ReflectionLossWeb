@@ -10,7 +10,7 @@ def plotar_rl_espessura_fixa(
     nome_arquivo_csv: str,
     caminho_arquivo_txt: str,
     unidade_frequencia: str,
-    hash_arquivo: str,
+    identificador_arquivo: str,
     espessura_amostra: float,
     baixar_grafico: bool,
     coaxial: bool = False,
@@ -26,7 +26,7 @@ def plotar_rl_espessura_fixa(
     if baixar_grafico:
         # Colocar comando para retornar arquivo
         with open(
-            f"./pythonPaginaINPE/static/files/saidas/saidas_{hash_arquivo}/mm_{round(espessura_amostra, 2)}mm.txt",
+            f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}/mm_{round(espessura_amostra, 2)}mm.txt",
             "w",
         ) as arquivo_dados_grafico:
             # Título
@@ -47,7 +47,7 @@ def plotar_rl_espessura_fixa(
     plt.ylabel("Perda por Reflexão (dB)")
     plt.title(f"Arquivo: {nome_arquivo_csv}")
 
-    nome_arquivo_imagem = f"rl_epessura_fixa_{hash_arquivo}.png"
+    nome_arquivo_imagem = f"rl_epessura_fixa_{identificador_arquivo}.png"
 
     caminho_imagem = f"./pythonPaginaINPE/static/images/{nome_arquivo_imagem}"
     fig.savefig(caminho_imagem)

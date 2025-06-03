@@ -7,7 +7,7 @@ def plotar_rl_espessura_variavel(
     nome_arquivo_csv: str,
     caminho_arquivo_txt: str,
     unidade_frequencia: str,
-    hash_arquivo: str,
+    identificador_arquivo: str,
     espessura_amostra: float,
     inicio: float,
     fim: float,
@@ -96,7 +96,7 @@ def plotar_rl_espessura_variavel(
             matrizind = []  # cabecalho
             espessura = round(d / 1e-3, 2)
             grav = open(
-                f"./pythonPaginaINPE/static/files/saidas/saidas_{hash_arquivo}/mm_{espessura}mm.txt",
+                f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}/mm_{espessura}mm.txt",
                 "w",
             )
             titulo = "%4s(%3s)  %s\n" % ("Freq", unidade_frequencia, "RL(dB)")
@@ -124,7 +124,7 @@ def plotar_rl_espessura_variavel(
     # Imprimindo arquivos Todos
     if baixar_grafico:
         arquivo = open(
-            f"./pythonPaginaINPE/static/files/saidas/saidas_{hash_arquivo}/Todos.txt",
+            f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}/Todos.txt",
             "w",
             encoding="utf-8",
         )
@@ -146,7 +146,7 @@ def plotar_rl_espessura_variavel(
     plt.ylabel("Perda por Reflexão (dB)")
     plt.title(f"Arquivo: {nome_arquivo_csv}")
 
-    caminho_imagem = f"./pythonPaginaINPE/static/images/rl_epessura_variavel_{hash_arquivo}.png"
+    caminho_imagem = f"./pythonPaginaINPE/static/images/rl_epessura_variavel_{identificador_arquivo}.png"
     fig.savefig(caminho_imagem)
 
     rota_grafico = "/reflectionlossespvar"

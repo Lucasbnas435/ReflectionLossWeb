@@ -7,7 +7,7 @@ def plotar_rl_dinamico(
     nome_arquivo_csv: str,
     caminho_arquivo_txt: str,
     unidade_frequencia: str,
-    hash_arquivo: str,
+    identificador_arquivo: str,
     espessura_amostra: float,
     baixar_grafico: bool,
     coaxial: bool = False,
@@ -74,19 +74,19 @@ def plotar_rl_dinamico(
     if baixar_grafico:
         try:
             os.mkdir(
-                f"./pythonPaginaINPE/static/files/saidas/saidas_{hash_arquivo}"
+                f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}"
             )
         except:
             shutil.rmtree(
-                f"./pythonPaginaINPE/static/files/saidas/saidas_{hash_arquivo}"
+                f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}"
             )
             os.mkdir(
-                f"./pythonPaginaINPE/static/files/saidas/saidas_{hash_arquivo}"
+                f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}"
             )
 
         espessura = str(round(d / 1e-3, 2))
         grav = open(
-            f"./pythonPaginaINPE/static/files/saidas/saidas_{hash_arquivo}/mm_{espessura}mm.txt",
+            f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}/mm_{espessura}mm.txt",
             "w",
         )
         titulo = "%4s(%3s)  %s\n" % ("Freq", unidade_frequencia, "RL(dB)")
@@ -109,7 +109,7 @@ def plotar_rl_dinamico(
     plt.title("Arquivo: " + nome_arquivo_csv)
 
     caminho_imagem = (
-        f"./pythonPaginaINPE/static/images/rl_epessura_dinamica_{hash_arquivo}.png"
+        f"./pythonPaginaINPE/static/images/rl_epessura_dinamica_{identificador_arquivo}.png"
     )
     fig.savefig(caminho_imagem)
 
@@ -120,6 +120,6 @@ def plotar_rl_dinamico(
         rota_informacoes = "/informacoescoaxial"
 
     complemento_nome_arquivo = get_hash(nome_arquivo_csv)
-    nome_template = f"plot_{hash_arquivo}{complemento_nome_arquivo}.html"
+    nome_template = f"plot_{identificador_arquivo}{complemento_nome_arquivo}.html"
 
     return nome_template

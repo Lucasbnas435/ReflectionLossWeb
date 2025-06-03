@@ -4,7 +4,7 @@ from flask import render_template
 
 
 def plotar_mi_epsilon(
-    hash_arquivo: str,
+    identificador_arquivo: str,
     caminho_arquivo_txt: str,
     nome_arquivo_csv: str,
     unidade_frequencia: str,
@@ -51,7 +51,7 @@ def plotar_mi_epsilon(
     print("Plotagem do gráfico de permeabilidade magnética finalizada")
 
     caminho_imagem = (
-        f"./pythonPaginaINPE/static/images/mi_epsilon_{hash_arquivo}.png"
+        f"./pythonPaginaINPE/static/images/mi_epsilon_{identificador_arquivo}.png"
     )
     fig.savefig(caminho_imagem)
 
