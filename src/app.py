@@ -1,26 +1,14 @@
 import os
 
 from flask import Flask, render_template, request, send_file
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileAllowed
 from werkzeug.utils import secure_filename
-from wtforms import FileField, SubmitField
-from wtforms.validators import InputRequired
+
+from src.forms.upload_file_form import UploadFileForm
+from src.utils.gerar_identificador import gerar_identificador
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "a1b2c3d4"
 app.config["UPLOAD_FOLDER"] = "static/files"
-
-
-class UploadFileForm(FlaskForm):
-    file = FileField(
-        "File",
-        validators=[
-            InputRequired(),
-            FileAllowed(["csv"], "Por favor, envie um arquivo csv"),
-        ],
-    )
-    submit = SubmitField("Enviar arquivo")
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -33,7 +21,7 @@ def arquivoumacamada():
     form = UploadFileForm()
     if form.validate_on_submit():
         file = form.file.data
-        hash_arquivo = get_hash(file.filename)
+        hash_arquivo = gerar_identificador()
         file.save(
             os.path.join(
                 os.path.abspath(os.path.dirname(__file__)),
