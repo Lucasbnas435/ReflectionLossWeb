@@ -13,7 +13,7 @@ def plotar_mi_epsilon(
     try:
         dados = np.loadtxt(caminho_arquivo_txt)
     except Exception as e:
-        print(f"Erro ao recuperar arquivo txt para plotar mi e epsilon: {e}")
+        print(f"Erro ao ler arquivo txt para plotar mi e epsilon: {e}")
         raise
 
     print("Extraindo dados de mi e epsilon")
