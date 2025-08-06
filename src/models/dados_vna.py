@@ -6,16 +6,14 @@ class DadosVna:
     Classe para representar os dados extraídos por um VNA (Vector Network Analyzer).
     """
 
-    def __init__(self, hash_arquivo: str):
-        self.__hash_arquivo = hash_arquivo
-        self.__caminho_arquivo_csv = (
-            f"./pythonPaginaINPE/static/files/{self.__hash_arquivo}.csv"
-        )
-        self.__caminho_arquivo_txt = f"./pythonPaginaINPE/static/files/txt_gerado/mm_{self.__hash_arquivo}.txt"
+    def __init__(self, identificador_arquivo: str):
+        self.__identificador_arquivo = identificador_arquivo
+        self.__caminho_arquivo_csv = f"./pythonPaginaINPE/static/files/{self.__identificador_arquivo}.csv"
+        self.__caminho_arquivo_txt = f"./pythonPaginaINPE/static/files/txt_gerado/mm_{self.__identificador_arquivo}.txt"
 
     @property
-    def hash_arquivo(self):
-        return self.__hash_arquivo
+    def identificador_arquivo(self):
+        return self.__identificador_arquivo
 
     @property
     def caminho_arquivo_csv(self):
