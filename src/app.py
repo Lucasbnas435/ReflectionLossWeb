@@ -144,5 +144,11 @@ def reflectionlossespfixa():
         return render_template("error_template.html")
 
 
+@app.errorhandler(Exception)
+def error_handler(error):
+    print(f"Ocorreu um erro: {str(error)}")
+    return render_template("tela_erro.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
