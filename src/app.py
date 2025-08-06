@@ -1,9 +1,18 @@
 import os
 
-from flask import Flask, render_template, request, send_file, session
+from flask import (
+    Flask,
+    redirect,
+    render_template,
+    request,
+    send_file,
+    session,
+    url_for,
+)
 from werkzeug.utils import secure_filename
 
 from src.forms.upload_file_form import UploadFileForm
+from src.models.dados_vna import DadosVna
 from src.utils.gerar_identificador import gerar_identificador
 
 app = Flask(__name__)
@@ -16,26 +25,43 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/arquivo", methods=["GET", "POST"])
-def arquivoumacamada():
+@app.route("/enviar-arquivo", methods=["GET", "POST"])
+def enviar_arquivo():
     form = UploadFileForm()
     if form.validate_on_submit():
-        file = form.file.data
+        arquivo = form.file.data
         identificador_arquivo = gerar_identificador()
-        file.save(
+        arquivo.save(
             os.path.join(
                 os.path.abspath(os.path.dirname(__file__)),
                 app.config["UPLOAD_FOLDER"],
                 secure_filename(f"{identificador_arquivo}.csv"),
             )
         )
-        csv_filename = file.filename
-        return render_template(
-            "redirecionar.html",
-            identificador_arquivo=identificador_arquivo,
-            csv_filename=csv_filename,
-        )
-    return render_template("arquivo_uma_camada.html", form=form)
+
+        dados_vna = DadosVna(identificador_arquivo=identificador_arquivo)
+        dados_vna.ler_csv()
+        dados_vna.gerar_arquivo_txt()
+
+        dados_arquivo = {
+            "nome_arquivo_csv": arquivo.filename,
+            "identificador_arquivo": dados_vna.identificador_arquivo,
+            "caminho_arquivo_csv": dados_vna.caminho_arquivo_csv,
+            "caminho_arquivo_txt": dados_vna.caminho_arquivo_txt,
+            "frequencia_corte": dados_vna.frequencia_corte,
+            "unidade_frequencia": dados_vna.unidade_frequencia,
+            "comprimento_suporte_amostra": dados_vna.comprimento_suporte_amostra,
+            "distancia_amostra": dados_vna.distancia_amostra,
+            "espessura_amostra": dados_vna.espessura_amostra,
+            "ifbw": dados_vna.ifbw,
+            "power": dados_vna.power,
+            "nome_banda": dados_vna.nome_banda,
+        }
+
+        session.update(dados_arquivo)
+
+        return redirect(url_for("informacoes"))
+    return render_template("tela_envio_de_arquivo.html", form=form)
 
 
 @app.route("/informacoes", methods=["POST"])
