@@ -23,6 +23,38 @@ class DadosVna:
     def caminho_arquivo_txt(self):
         return self.__caminho_arquivo_txt
 
+    @property
+    def frequencia_corte(self):
+        return self.__frequencia_corte
+
+    @property
+    def unidade_frequencia(self):
+        return self.__unidade_frequencia
+
+    @property
+    def comprimento_suporte_amostra(self):
+        return self.__comprimento_suporte_amostra
+
+    @property
+    def distancia_amostra(self):
+        return self.__distancia_amostra
+
+    @property
+    def espessura_amostra(self):
+        return self.__espessura_amostra
+
+    @property
+    def ifbw(self):
+        return self.__ifbw
+
+    @property
+    def power(self):
+        return self.__power
+
+    @property
+    def nome_banda(self):
+        return self.__nome_banda
+
     def ler_csv(self):
         try:
             with open(self.__caminho_arquivo_csv, "r") as arquivo_csv:
