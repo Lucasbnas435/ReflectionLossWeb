@@ -1,5 +1,6 @@
 import os
 
+from dotenv import load_dotenv
 from flask import (
     Flask,
     redirect,
@@ -14,6 +15,8 @@ from werkzeug.utils import secure_filename
 from src.forms.upload_file_form import UploadFileForm
 from src.models.dados_vna import DadosVna
 from src.utils.gerar_identificador import gerar_identificador
+
+load_dotenv()
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "a1b2c3d4"
