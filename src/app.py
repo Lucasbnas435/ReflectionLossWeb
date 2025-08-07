@@ -64,40 +64,24 @@ def enviar_arquivo():
     return render_template("tela_envio_de_arquivo.html", form=form)
 
 
-@app.route("/informacoes", methods=["POST"])
+@app.route("/informacoes", methods=["GET", "POST"])
 def informacoes():
-    try:
-        csv_filename = request.form.get("csv_filename")
-        identificador_arquivo = request.form.get("identificador_arquivo")
-        (
-            txt_filename,
-            compsuporteamostra,
-            frequenciacorte,
-            distamostra,
-            espamostra,
-            ifbw,
-            power,
-            nome_banda,
-            undfrequencia,
-        ) = read_csv(identificador_arquivo)
-        read_txt(txt_filename)
-
-        return render_template(
-            "informacoes.html",
-            csv_filename=csv_filename,
-            nome_arquivo_txt=txt_filename,
-            frequenciacorte=frequenciacorte,
-            compsuporteamostra=compsuporteamostra,
-            distamostra=distamostra,
-            espamostra=espamostra,
-            ifbw=ifbw,
-            power=power,
-            nome_banda=nome_banda,
-            undfrequencia=undfrequencia,
-            identificador_arquivo=identificador_arquivo,
-        )
-    except:
-        return render_template("error_template.html")
+    informacoes_extraidas = {
+        "nome_arquivo_csv": session.get(
+            "nome_arquivo_csv", "Nome não encontrado"
+        ),
+        "frequencia_corte": session.get("frequencia_corte", ""),
+        "unidade_frequencia": session.get("unidade_frequencia", ""),
+        "comprimento_suporte_amostra": session.get(
+            "comprimento_suporte_amostra", ""
+        ),
+        "distancia_amostra": session.get("distancia_amostra", ""),
+        "espessura_amostra": session.get("espessura_amostra", ""),
+        "ifbw": session.get("ifbw", ""),
+        "power": session.get("power", ""),
+        "nome_banda": session.get("nome_banda", ""),
+    }
+    return render_template("informacoes.html", **informacoes_extraidas)
 
 
 @app.route("/grafico/rl-espessura-fixa", methods=["POST"])
