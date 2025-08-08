@@ -12,6 +12,7 @@ from flask import (
 )
 from werkzeug.utils import secure_filename
 
+from src.controllers.plotar_rl_espessura_fixa import plotar_rl_espessura_fixa
 from src.forms.upload_file_form import UploadFileForm
 from src.models.dados_vna import DadosVna
 from src.utils.gerar_identificador import gerar_identificador
@@ -87,49 +88,17 @@ def informacoes():
     return render_template("informacoes.html", **informacoes_extraidas)
 
 
-@app.route("/grafico/rl-espessura-fixa", methods=["POST"])
-def reflectionlossespfixa():
-    try:
-        identificador_arquivo = request.form.get("identificador_arquivo")
-        csv_filename = request.form.get("csv_filename")
-        txt_filename = request.form.get("txt_filename")
-        undfrequencia = request.form.get("undfrequencia")
-        espamostra = request.form.get("espamostra")
-        baixar_grafico = int(request.form.get("baixar_grafico"))
-
-        if baixar_grafico:
-            filename = RL_esp_fixa_plot(
-                csv_filename,
-                txt_filename,
-                undfrequencia,
-                espamostra,
-                baixar_grafico,
-                identificador_arquivo,
-            )
-            return send_file(
-                f"./static/files/saidas/saidas_{identificador_arquivo}/{filename}",
-                as_attachment=True,
-            )
-
-        nome_template = RL_esp_fixa_plot(
-            csv_filename,
-            txt_filename,
-            undfrequencia,
-            espamostra,
-            baixar_grafico,
-            identificador_arquivo,
-        )
-        return render_template(
-            nome_template,
-            csv_filename=csv_filename,
-            nome_arquivo_txt=txt_filename,
-            undfrequencia=undfrequencia,
-            espamostra=espamostra,
-            identificador_arquivo=identificador_arquivo,
-        )
-    except:
-        return render_template("error_template.html")
-
+@app.route("/grafico/rl-espessura-fixa", methods=["GET", "POST"])
+def grafico_rl_espessura_fixa():
+    return plotar_rl_espessura_fixa(
+        nome_arquivo_csv=session.get("nome_arquivo_csv", ""),
+        caminho_arquivo_txt=session.get("caminho_arquivo_txt", ""),
+        unidade_frequencia=session.get("unidade_frequencia", ""),
+        identificador_arquivo=session.get("identificador_arquivo"),
+        espessura_amostra=session.get("espessura_amostra"),
+        baixar_grafico=False,
+        coaxial=False,
+    )
 
 @app.errorhandler(Exception)
 def error_handler(error):
