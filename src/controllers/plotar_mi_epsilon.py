@@ -1,3 +1,5 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 from flask import render_template
@@ -50,9 +52,7 @@ def plotar_mi_epsilon(
     plt.grid(True)
     print("Plotagem do gráfico de permeabilidade magnética finalizada")
 
-    caminho_imagem = (
-        f"./pythonPaginaINPE/static/images/mi_epsilon_{identificador_arquivo}.png"
-    )
+    caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/mi_epsilon_{identificador_arquivo}.png"
     fig.savefig(caminho_imagem)
 
     rota_informacoes = "/informacoes"

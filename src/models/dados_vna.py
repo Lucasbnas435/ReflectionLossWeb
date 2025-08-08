@@ -1,4 +1,5 @@
 import csv
+import os
 
 
 class DadosVna:
@@ -8,8 +9,8 @@ class DadosVna:
 
     def __init__(self, identificador_arquivo: str):
         self.__identificador_arquivo = identificador_arquivo
-        self.__caminho_arquivo_csv = f"./pythonPaginaINPE/static/files/{self.__identificador_arquivo}.csv"
-        self.__caminho_arquivo_txt = f"./pythonPaginaINPE/static/files/txt_gerado/mm_{self.__identificador_arquivo}.txt"
+        self.__caminho_arquivo_csv = f"{os.getenv("STATIC_FOLDER_PATH")}/files/{self.__identificador_arquivo}.csv"
+        self.__caminho_arquivo_txt = f"{os.getenv("STATIC_FOLDER_PATH")}/files/txt_gerado/mm_{self.__identificador_arquivo}.txt"
 
     @property
     def identificador_arquivo(self):

@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 import matplotlib.pyplot as plt
@@ -26,7 +27,7 @@ def plotar_rl_espessura_fixa(
     if baixar_grafico:
         # Colocar comando para retornar arquivo
         with open(
-            f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}/mm_{round(espessura_amostra, 2)}mm.txt",
+            f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{identificador_arquivo}/mm_{round(espessura_amostra, 2)}mm.txt",
             "w",
         ) as arquivo_dados_grafico:
             # Título
@@ -49,7 +50,9 @@ def plotar_rl_espessura_fixa(
 
     nome_arquivo_imagem = f"rl_epessura_fixa_{identificador_arquivo}.png"
 
-    caminho_imagem = f"./pythonPaginaINPE/static/images/{nome_arquivo_imagem}"
+    caminho_imagem = (
+        f"{os.getenv("STATIC_FOLDER_PATH")}/images/{nome_arquivo_imagem}"
+    )
     fig.savefig(caminho_imagem)
 
     rota_grafico = "/reflectionlossespfixa"
