@@ -2,7 +2,12 @@ venv/
 .mypy_cache/
 __pycache__/
 .env
+
 src/static/files/saidas/*
 !src/static/files/saidas/.gitkeep
+
 src/static/files/txt_gerado/*
 !src/static/files/txt_gerado/.gitkeep
+
+src/static/files/csv_enviado/*
+!src/static/files/csv_enviado/.gitkeep
