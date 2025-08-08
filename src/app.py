@@ -30,7 +30,7 @@ def enviar_arquivo():
         arquivo.save(
             os.path.join(
                 os.path.abspath(os.path.dirname(__file__)),
-                app.config["UPLOAD_FOLDER"],
+                f"{app.config["UPLOAD_FOLDER"]}/csv_enviado",
                 secure_filename(f"{identificador_arquivo}.csv"),
             )
         )

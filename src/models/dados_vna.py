@@ -9,7 +9,7 @@ class DadosVna:
 
     def __init__(self, identificador_arquivo: str):
         self.__identificador_arquivo = identificador_arquivo
-        self.__caminho_arquivo_csv = f"{os.getenv("STATIC_FOLDER_PATH")}/files/{self.__identificador_arquivo}.csv"
+        self.__caminho_arquivo_csv = f"{os.getenv("STATIC_FOLDER_PATH")}/files/csv_enviado/{self.__identificador_arquivo}.csv"
         self.__caminho_arquivo_txt = f"{os.getenv("STATIC_FOLDER_PATH")}/files/txt_gerado/mm_{self.__identificador_arquivo}.txt"
 
     @property
