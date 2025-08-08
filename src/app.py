@@ -77,7 +77,7 @@ def informacoes():
         "power": session.get("power", ""),
         "nome_banda": session.get("nome_banda", ""),
     }
-    return render_template("informacoes.html", **informacoes_extraidas)
+    return render_template("tela_informacoes.html", **informacoes_extraidas)
 
 
 @app.route("/grafico/rl-espessura-fixa", methods=["GET", "POST"])
