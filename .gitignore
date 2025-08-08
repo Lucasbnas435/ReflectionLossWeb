@@ -2,6 +2,7 @@ venv/
 .mypy_cache/
 __pycache__/
 .env
-saidas/*
-!saidas/.gitkeep
-#!static/files/saidas/.gitkeep
+src/static/files/saidas/*
+!src/static/files/saidas/.gitkeep
+src/static/files/txt_gerado/*
+!src/static/files/txt_gerado/.gitkeep
