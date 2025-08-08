@@ -1,15 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import (
-    Flask,
-    redirect,
-    render_template,
-    request,
-    send_file,
-    session,
-    url_for,
-)
+from flask import Flask, redirect, render_template, session, url_for
 from werkzeug.utils import secure_filename
 
 from src.controllers.plotar_rl_espessura_fixa import plotar_rl_espessura_fixa
@@ -99,6 +91,7 @@ def grafico_rl_espessura_fixa():
         baixar_grafico=False,
         coaxial=False,
     )
+
 
 @app.errorhandler(Exception)
 def error_handler(error):
