@@ -98,8 +98,9 @@ class DadosVna:
                 # Pula as 15 primeiras linhas, que são o cabeçalho do arquivo
                 for _ in range(15):
                     next(conteudo_csv)
-                
+
+                linhas_conteudo_csv = list(conteudo_csv)
+
                 # Formata o conteudo do arquivo csv e escreve no txt
-                for row in conteudo_csv:
-                    # conteudo_linha = "\t".join(row) + "\n"
+                for row in linhas_conteudo_csv[:-1]:
                     txt_file.write("\t".join(row).strip() + "\n")
