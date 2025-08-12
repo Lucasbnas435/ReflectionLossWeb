@@ -11,3 +11,6 @@ src/static/files/txt_gerado/*
 
 src/static/files/csv_enviado/*
 !src/static/files/csv_enviado/.gitkeep
+
+src/static/images/graficos_gerados/*
+!src/static/images/graficos_gerados/.gitkeep

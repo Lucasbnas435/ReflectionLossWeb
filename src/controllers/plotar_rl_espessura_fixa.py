@@ -51,7 +51,7 @@ def plotar_rl_espessura_fixa(
     nome_arquivo_imagem = f"rl_epessura_fixa_{identificador_arquivo}.png"
 
     caminho_imagem = (
-        f"{os.getenv("STATIC_FOLDER_PATH")}/images/{nome_arquivo_imagem}"
+        f"{os.getenv("STATIC_FOLDER_PATH")}/images/graficos_gerados/{nome_arquivo_imagem}"
     )
     fig.savefig(caminho_imagem)
 
