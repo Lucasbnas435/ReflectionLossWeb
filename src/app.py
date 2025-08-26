@@ -1,10 +1,11 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, redirect, render_template, session, url_for
+from flask import Flask, redirect, render_template, request, session, url_for
 from werkzeug.utils import secure_filename
 
 from src.controllers.plotar_mi_epsilon import plotar_mi_epsilon
+from src.controllers.plotar_rl_dinamico import plotar_rl_dinamico
 from src.controllers.plotar_rl_espessura_fixa import plotar_rl_espessura_fixa
 from src.forms.upload_file_form import UploadFileForm
 from src.models.dados_vna import DadosVna
@@ -89,6 +90,26 @@ def grafico_rl_espessura_fixa():
         unidade_frequencia=session.get("unidade_frequencia", ""),
         identificador_arquivo=session.get("identificador_arquivo"),
         espessura_amostra=session.get("espessura_amostra"),
+        baixar_grafico=False,
+        coaxial=False,
+    )
+
+
+@app.route("/grafico/rl-espessura-dinamica", methods=["GET", "POST"])
+def grafico_rl_espessura_dinamica():
+    espessura_amostra = float(request.form.get("espessura_amostra", 1.0))
+
+    inicio_slider = float(request.form.get("inicio_slider", 0.1))
+    fim_slider = float(request.form.get("fim_slider", 10.0))
+
+    return plotar_rl_dinamico(
+        nome_arquivo_csv=session.get("nome_arquivo_csv", ""),
+        caminho_arquivo_txt=session.get("caminho_arquivo_txt", ""),
+        unidade_frequencia=session.get("unidade_frequencia", ""),
+        identificador_arquivo=session.get("identificador_arquivo"),
+        espessura_amostra=espessura_amostra,
+        inicio_slider=inicio_slider,
+        fim_slider=fim_slider,
         baixar_grafico=False,
         coaxial=False,
     )
