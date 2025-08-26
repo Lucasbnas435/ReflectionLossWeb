@@ -20,9 +20,9 @@
         </div>
     </header>
 
-<img src="{{ url_for('static', filename='images/' + nome_arquivo_imagem) }}?t={{ timestamp }}">
+<img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}">
 
-<form action="{rota_informacoes}" method="post">
+<form action="{{ rota_informacoes }}" method="post">
 <button type="submit">Retornar ao menu</button>
 </form>
     <footer>

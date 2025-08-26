@@ -52,15 +52,17 @@ def plotar_mi_epsilon(
     plt.grid(True)
     print("Plotagem do gráfico de permeabilidade magnética finalizada")
 
-    caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/mi_epsilon_{identificador_arquivo}.png"
+    nome_arquivo_imagem = f"mi_epsilon_{identificador_arquivo}.png"
+    caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/graficos_gerados/{nome_arquivo_imagem}"
     fig.savefig(caminho_imagem)
 
     rota_informacoes = "/informacoes"
     if coaxial:
         rota_informacoes = "/informacoes-coaxial"
 
-    return render_template(
-        "grafico_mi_epsilon.html",
-        nome_arquivo_imagem=caminho_imagem,
-        rota_informacoes=rota_informacoes,
-    )
+    dados_view = {
+        "nome_arquivo_imagem": nome_arquivo_imagem,
+        "rota_informacoes": rota_informacoes,
+    }
+
+    return render_template("grafico_mi_epsilon.html", **dados_view)
