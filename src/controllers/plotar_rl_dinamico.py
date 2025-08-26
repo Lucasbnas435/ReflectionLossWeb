@@ -63,6 +63,7 @@ def plotar_rl_dinamico(
     plt.plot(frequencias, s11_v, label=str(espessura_amostra))
 
     # Plotando grafico
+    plt.legend(title="Espessura (mm)")
     plt.xlabel(f"Frequência ({unidade_frequencia})")
     plt.ylabel("Perda por Reflexão (dB)")
     plt.title(f"Arquivo: {nome_arquivo_csv}")
