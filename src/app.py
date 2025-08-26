@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask, redirect, render_template, session, url_for
 from werkzeug.utils import secure_filename
 
+from src.controllers.plotar_mi_epsilon import plotar_mi_epsilon
 from src.controllers.plotar_rl_espessura_fixa import plotar_rl_espessura_fixa
 from src.forms.upload_file_form import UploadFileForm
 from src.models.dados_vna import DadosVna
@@ -89,6 +90,17 @@ def grafico_rl_espessura_fixa():
         identificador_arquivo=session.get("identificador_arquivo"),
         espessura_amostra=session.get("espessura_amostra"),
         baixar_grafico=False,
+        coaxial=False,
+    )
+
+
+@app.route("/grafico/mi-epsilon", methods=["GET", "POST"])
+def grafico_mi_epsilon():
+    return plotar_mi_epsilon(
+        identificador_arquivo=session.get("identificador_arquivo"),
+        caminho_arquivo_txt=session.get("caminho_arquivo_txt", ""),
+        nome_arquivo_csv=session.get("nome_arquivo_csv", ""),
+        unidade_frequencia=session.get("unidade_frequencia", ""),
         coaxial=False,
     )
 
