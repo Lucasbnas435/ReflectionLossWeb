@@ -7,6 +7,9 @@ from werkzeug.utils import secure_filename
 from src.controllers.plotar_mi_epsilon import plotar_mi_epsilon
 from src.controllers.plotar_rl_dinamico import plotar_rl_dinamico
 from src.controllers.plotar_rl_espessura_fixa import plotar_rl_espessura_fixa
+from src.controllers.plotar_rl_espessura_variavel import (
+    plotar_rl_espessura_variavel,
+)
 from src.forms.upload_file_form import UploadFileForm
 from src.models.dados_vna import DadosVna
 from src.utils.gerar_identificador import gerar_identificador
@@ -90,6 +93,28 @@ def grafico_rl_espessura_fixa():
         unidade_frequencia=session.get("unidade_frequencia", ""),
         identificador_arquivo=session.get("identificador_arquivo"),
         espessura_amostra=session.get("espessura_amostra"),
+        baixar_grafico=False,
+        coaxial=False,
+    )
+
+
+@app.route("/grafico/rl-espessura-variavel", methods=["GET", "POST"])
+def grafico_rl_espessura_variavel():
+    espessura_amostra = float(request.form.get("espessura_amostra", 1.0))
+
+    inicio = float(request.form.get("inicio", 0.1))
+    fim = float(request.form.get("fim", 10.0))
+    passo = float(request.form.get("passo", 1.0))
+
+    return plotar_rl_espessura_variavel(
+        nome_arquivo_csv=session.get("nome_arquivo_csv", ""),
+        caminho_arquivo_txt=session.get("caminho_arquivo_txt", ""),
+        unidade_frequencia=session.get("unidade_frequencia", ""),
+        identificador_arquivo=session.get("identificador_arquivo"),
+        espessura_amostra=espessura_amostra,
+        inicio=inicio,
+        fim=fim,
+        passo=passo,
         baixar_grafico=False,
         coaxial=False,
     )

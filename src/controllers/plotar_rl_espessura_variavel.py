@@ -1,6 +1,10 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 from flask import render_template
+
+from src.use_cases.calcular_rl import calcular_rl
 
 
 def plotar_rl_espessura_variavel(
@@ -15,86 +19,40 @@ def plotar_rl_espessura_variavel(
     baixar_grafico: bool,
     coaxial: bool = False,
 ):
-    menor_y = 99999999
-    curva_menor_y = float()
+    # menor_y = 99999999
+    # curva_menor_y = float()
 
     with open(caminho_arquivo_txt, "r") as arquivo_txt:
         conteudo_arquivo_txt = arquivo_txt.readlines()
 
-    # Ajuste da Referencia de L1 e L2
-    # [m] #Espessura da amostra (Livro chama de L)
-    d = espessura_amostra * 1e-3
-
-    # CONSTANTES
-    c = 2.998e8  # [m/s] #velocidade da Luz no vacuo
-    # Vetores - 1
-    F = []  # frequencia [Hz] DE CALCULO
-    F_grafic = []  # FREQUENCIA PARA PLOTAR EM [GHz]
-
-    # Vetores - 2
-    er_r = []  # permissividade real
-    er_i = []  # permissividade imag
-    ur_r = []  # permeabilidade real
-    ur_i = []  # permeabilidade imag
-    EX = []
-    UX = []
-
-    # Vetores - 3
-    s11_v = []  # [a.u]
-
-    # Entrada do passo
-    inicio = inicio * 1e-3
-    fim = fim * 1e-3 + 0.001e-3
-    passo = passo * 1e-3
+    # # Entrada do passo
+    # inicio = inicio * 1e-3
+    # fim = fim * 1e-3 + 0.001e-3
+    # passo = passo * 1e-3
+    # menores_valores_rl = []
 
     fig = plt.figure(figsize=(10, 5))
 
-    for d in np.arange(inicio, fim, passo):
-        s11_v = []
-        F = []
-        for n, linha in enumerate(conteudo_arquivo_txt):
-            dados = linha.split("\t")
-            # frequencia
-            f = float(dados[0]) * 1e9
-            F.append(f)
-            F_grafic.append(f / 1e9)
+    frequencias_resultante = []
+    s11_v_resultante = []
 
-            # Permissividade NRW
-            ex = float(dados[1]) + 1j * float(dados[2])
-            er_r.append(ex.real)
-            er_i.append(ex.imag)
-            EX.append(ex)
+    for espessura in np.arange(inicio, fim, passo):
+        frequencias, s11_v = calcular_rl(
+            conteudo_arquivo_txt=conteudo_arquivo_txt,
+            espessura_amostra=espessura,
+        )
 
-            # Permeabilidade NRW
-            ux = float(dados[3]) + 1j * float(dados[4])
-            ur_r.append(ux.real)
-            ur_i.append(ux.imag)
-            UX.append(ux)
-
-            # *********************Calculo da Refletividade (RL)***************
-            # Calcular impedância de entrada
-            z = (50 * (UX[n] / EX[n]) ** (1.0 / 2.0)) * np.tanh(
-                1j * (2 * np.pi * d * f / c) * ((UX[n] * EX[n]) ** (1.0 / 2.0))
-            )
-            db = -20 * np.log10(
-                abs((z - 50) / (z + 50))
-            )  # [dB] somente para voltagem
-
-            y_value = round(db, 5)
-
-            if y_value < menor_y:
-                menor_y = y_value
-                curva_menor_y = d
-            s11_v.append(y_value)  # dB
+        frequencias_resultante.append(frequencias)
+        s11_v_resultante.append(s11_v)
 
         # Dados para serem Plotados
-        plt.plot(F, s11_v, label=str(float(d) * 1e3))
-
+        plt.plot(frequencias, s11_v, label=str(espessura))
+        """
         if baixar_grafico:
             contador = 0  # para impressao da matriz de resultados
             matriz = []  # matriz contendo todos rersultados obtidos
             matrizind = []  # cabecalho
-            espessura = round(d / 1e-3, 2)
+            espessura = round(espessura / 1e-3, 2)
             grav = open(
                 f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}/mm_{espessura}mm.txt",
                 "w",
@@ -120,7 +78,9 @@ def plotar_rl_espessura_variavel(
             contador = contador + 1
 
             grav.close()
+        """
 
+    """
     # Imprimindo arquivos Todos
     if baixar_grafico:
         arquivo = open(
@@ -139,6 +99,7 @@ def plotar_rl_espessura_variavel(
             arquivo.write("\n")
         arquivo.close()
         return ""
+    """
 
     # Plotando grafico
     plt.legend(title="Espessura (mm)")
@@ -146,19 +107,22 @@ def plotar_rl_espessura_variavel(
     plt.ylabel("Perda por Reflexão (dB)")
     plt.title(f"Arquivo: {nome_arquivo_csv}")
 
-    caminho_imagem = f"./pythonPaginaINPE/static/images/rl_epessura_variavel_{identificador_arquivo}.png"
+    nome_arquivo_imagem = f"rl_epessura_variavel_{identificador_arquivo}.png"
+    caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/graficos_gerados/{nome_arquivo_imagem}"
     fig.savefig(caminho_imagem)
 
-    rota_grafico = "/reflectionlossespvar"
+    rota_grafico = "/grafico/rl-espessura-variavel"
     rota_informacoes = "/informacoes"
     if coaxial:
         rota_grafico = "/rlespvarcoaxial"
         rota_informacoes = "/informacoescoaxial"
 
     dados_view = {
-        "curva_menor_y": curva_menor_y * 1e3,
+        # "curva_menor_y": curva_menor_y,
         "rota_grafico": rota_grafico,
         "rota_informacoes": rota_informacoes,
+        "caminho_imagem": caminho_imagem,
+        "nome_arquivo_imagem": nome_arquivo_imagem,
     }
 
     return render_template("grafico_espessura_variavel.html", **dados_view)
