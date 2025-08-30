@@ -19,7 +19,7 @@ def plotar_rl_espessura_fixa(
     with open(caminho_arquivo_txt, "r") as arquivo_txt:
         conteudo_arquivo_txt = arquivo_txt.readlines()
 
-    frequencias, s11_v = calcular_rl(
+    frequencias_plotagem, s11_v = calcular_rl(
         conteudo_arquivo_txt=conteudo_arquivo_txt,
         espessura_amostra=espessura_amostra,
     )
@@ -33,7 +33,7 @@ def plotar_rl_espessura_fixa(
             # Título
             arquivo_dados_grafico.write(f"Freq {unidade_frequencia} RL(dB)")
             # Dados do gráfico
-            for frequencia, rl in zip(frequencias, s11_v):
+            for frequencia, rl in zip(frequencias_plotagem, s11_v):
                 arquivo_dados_grafico.write(f"{frequencia:.2f} {rl:.2f}")
 
         return f"mm_{round(espessura_amostra, 2)}mm.txt"
@@ -41,7 +41,7 @@ def plotar_rl_espessura_fixa(
     # Plotando grafico
     fig = plt.figure(figsize=(10, 5))
     plt.plot(
-        frequencias, s11_v, label=str(espessura_amostra)
+        frequencias_plotagem, s11_v, label=str(espessura_amostra)
     )  # Dados para serem plotados
     plt.legend(title="Espessura (mm)")
     plt.xlabel(f"Frequência ({unidade_frequencia})")

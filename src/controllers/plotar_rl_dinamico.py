@@ -23,7 +23,7 @@ def plotar_rl_dinamico(
     with open(caminho_arquivo_txt, "r") as arquivo_txt:
         conteudo_arquivo_txt = arquivo_txt.readlines()
 
-    frequencias, s11_v = calcular_rl(
+    frequencias_plotagem, s11_v = calcular_rl(
         conteudo_arquivo_txt=conteudo_arquivo_txt,
         espessura_amostra=espessura_amostra,
     )
@@ -60,7 +60,7 @@ def plotar_rl_dinamico(
 
     fig = plt.figure(figsize=(10, 5))
     # Dados para serem Plotados
-    plt.plot(frequencias, s11_v, label=str(espessura_amostra))
+    plt.plot(frequencias_plotagem, s11_v, label=str(espessura_amostra))
 
     # Plotando grafico
     plt.legend(title="Espessura (mm)")

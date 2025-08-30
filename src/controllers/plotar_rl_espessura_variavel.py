@@ -37,16 +37,16 @@ def plotar_rl_espessura_variavel(
     s11_v_resultante = []
 
     for espessura in np.arange(inicio, fim, passo):
-        frequencias, s11_v = calcular_rl(
+        frequencias_plotagem, s11_v = calcular_rl(
             conteudo_arquivo_txt=conteudo_arquivo_txt,
             espessura_amostra=espessura,
         )
 
-        frequencias_resultante.append(frequencias)
+        frequencias_resultante.append(frequencias_plotagem)
         s11_v_resultante.append(s11_v)
 
         # Dados para serem Plotados
-        plt.plot(frequencias, s11_v, label=str(espessura))
+        plt.plot(frequencias_plotagem, s11_v, label=str(espessura))
         """
         if baixar_grafico:
             contador = 0  # para impressao da matriz de resultados
