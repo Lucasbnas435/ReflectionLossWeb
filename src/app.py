@@ -100,8 +100,6 @@ def grafico_rl_espessura_fixa():
 
 @app.route("/grafico/rl-espessura-variavel", methods=["GET", "POST"])
 def grafico_rl_espessura_variavel():
-    espessura_amostra = float(request.form.get("espessura_amostra", 1.0))
-
     inicio = float(request.form.get("inicio", 0.1))
     fim = float(request.form.get("fim", 10.0))
     passo = float(request.form.get("passo", 1.0))
@@ -111,7 +109,6 @@ def grafico_rl_espessura_variavel():
         caminho_arquivo_txt=session.get("caminho_arquivo_txt", ""),
         unidade_frequencia=session.get("unidade_frequencia", ""),
         identificador_arquivo=session.get("identificador_arquivo"),
-        espessura_amostra=espessura_amostra,
         inicio=inicio,
         fim=fim,
         passo=passo,

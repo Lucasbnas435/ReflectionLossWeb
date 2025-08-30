@@ -13,7 +13,6 @@ def plotar_rl_espessura_variavel(
     caminho_arquivo_txt: str,
     unidade_frequencia: str,
     identificador_arquivo: str,
-    espessura_amostra: float,
     inicio: float,
     fim: float,
     passo: float,
