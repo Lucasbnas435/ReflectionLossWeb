@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -125,6 +126,7 @@ def plotar_rl_espessura_variavel(
         "rota_informacoes": rota_informacoes,
         "caminho_imagem": caminho_imagem,
         "nome_arquivo_imagem": nome_arquivo_imagem,
+        "timestamp": datetime.now().timestamp(),  # usado para cache busting
     }
 
     return render_template("grafico_espessura_variavel.html", **dados_view)
