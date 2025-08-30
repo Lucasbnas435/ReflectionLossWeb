@@ -12,8 +12,7 @@ def calcular_rl(
     C = 2.998e8  # [m/s] #velocidade da Luz no vacuo
 
     # Vetores - 1
-    frequencias = []  # frequencia [Hz] DE CALCULO
-    F_grafic = []  # FREQUENCIA PARA PLOTAR EM [GHz]
+    frequencias_plotagem = []  # frequencias para plotar o gráfico [GHz]
 
     # Vetores - 2
     er_r = []  # permissividade elétrica real
@@ -30,9 +29,9 @@ def calcular_rl(
     for n, linha in enumerate(conteudo_arquivo_txt):
         dados = linha.split("\t")
         # frequencia
-        f = float(dados[0]) * 1e9
-        frequencias.append(f)
-        F_grafic.append(f / 1e9)
+        frequencia_ghz = float(dados[0])
+        frequencias_plotagem.append(frequencia_ghz)
+        frequencia_hz = frequencia_ghz * 1e9
 
         # Permissividade NRW
         ex = float(dados[1]) + 1j * float(dados[2])
@@ -54,7 +53,7 @@ def calcular_rl(
             ** (1.0 / 2.0)
         ) * np.tanh(
             1j
-            * (2 * np.pi * d * f / C)
+            * (2 * np.pi * d * frequencia_hz / C)
             * (
                 (permeabilidade_magnetica[n] * permissividade_eletrica[n])
                 ** (1.0 / 2.0)
@@ -65,4 +64,4 @@ def calcular_rl(
         )  # [dB] somente para voltagem
         s11_v.append(round(db, 5))
 
-    return frequencias, s11_v
+    return frequencias_plotagem, s11_v
