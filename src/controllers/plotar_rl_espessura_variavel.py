@@ -37,6 +37,8 @@ def plotar_rl_espessura_variavel(
     s11_v_resultante = []
 
     for espessura in np.arange(inicio, fim, passo):
+        espessura = round(espessura, 3)
+
         frequencias_plotagem, s11_v = calcular_rl(
             conteudo_arquivo_txt=conteudo_arquivo_txt,
             espessura_amostra=espessura,

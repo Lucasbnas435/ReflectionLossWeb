@@ -69,16 +69,16 @@
 
     <form action="/grafico/rl-espessura-variavel" method="post">
         <h3><font color="#033c79">Passo 4:</font> Plotar gráfico de Perda por Reflexão versus frequência com espessura variável</h3>
-        Espessura inicial em mm: <input type="number" name="inicio" step="any" required="true"><br>
-        Espessura final em mm: <input type="number" name="fim" step="any" required="true"><br>
-        Variação em mm: <input type="number" name="passo" step="any" required="true"><br>
+        Espessura inicial em mm: <input type="number" name="inicio" step="0.001" required="true"><br>
+        Espessura final em mm: <input type="number" name="fim" step="0.001" required="true"><br>
+        Variação em mm: <input type="number" name="passo" step="0.001" required="true"><br>
         <button type="submit">Clique aqui para gráfico R.L. espessura variável</button>
     </form>
 
     <form action="/grafico/rl-espessura-dinamica" method="post">
         <h3><font color="#033c79">Passo 5:</font> Plotar gráfico de Perda por Reflexão dinâmico</h3>
-        Espessura mínima em mm: <input type="number" name="inicio_slider" step="any" required="true"><br>
-        Espessura máxima em mm: <input type="number" name="fim_slider" step="any" required="true"><br>
+        Espessura mínima em mm: <input type="number" name="inicio_slider" step="0.001" required="true"><br>
+        Espessura máxima em mm: <input type="number" name="fim_slider" step="0.001" required="true"><br>
         <button type="submit">Clique aqui para gráfico R.L. dinâmico</button>
     </form>
     <footer>

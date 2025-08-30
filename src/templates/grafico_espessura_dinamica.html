@@ -24,7 +24,7 @@
     <form action= "{{ rota_grafico }}" method="post">
         Espessura mínima em mm: <input type="number" name="inicio_slider" step="any" value="{{ inicio_slider }}" required="true"><br>
         Espessura máxima em mm: <input type="number" name="fim_slider" step="any" value="{{ fim_slider }}" required="true"><br>
-        <input type="range" id="espessura_amostra" name="espessura_amostra" min="{{ inicio_slider }}" max="{{ fim_slider }}" step="0.000001" value="{{ espessura_amostra }}" onchange=submit()>
+        <input type="range" id="espessura_amostra" name="espessura_amostra" min="{{ inicio_slider }}" max="{{ fim_slider }}" step="0.001" value="{{ espessura_amostra }}" onchange=submit()>
         <label for="espessura_amostra">Espessura: {{ espessura_amostra }} mm</label>
     </form>
 
