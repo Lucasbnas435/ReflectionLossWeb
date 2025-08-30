@@ -1,5 +1,4 @@
 import os
-from datetime import datetime
 
 import matplotlib.pyplot as plt
 from flask import render_template
@@ -64,7 +63,6 @@ def plotar_rl_espessura_fixa(
         "rota_informacoes": rota_informacoes,
         "caminho_imagem": caminho_imagem,
         "nome_arquivo_imagem": nome_arquivo_imagem,
-        "timestamp": datetime.now().timestamp(),  # usado para cache busting
     }
 
     return render_template("grafico_espessura_fixa.html", **dados_view)
