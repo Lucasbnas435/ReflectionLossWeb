@@ -1,27 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <header>
-        <b>Analisador de Amostras VNA |</b>
-        <a href="/" class="btn">Home</a>
-        <a href="/enviar-arquivo" class="btn">1 camada</a>
-        <a href="/primeiroarquivoduo" class="btn">2 camadas</a>
-        <a href="/primeiroarquivo" class="btn">3 camadas</a>
-        <a href="/arquivocoaxial" class="btn">Coaxial</a>
-        <a href="/gerarxml" class="btn">Gerar XML</a>
-        <div class="images">
-            <img src="{{ url_for('static', filename='images/logoINPE.png') }}" alt="Logotipo do INPE">
-            <img src="{{ url_for('static', filename='images/logoFATEC.png') }}" alt="Logotipo da FATEC Taubate">
-        </div>
-    </header>
+{% extends "base.html" %}
 
+{% block title %}Home - Analisador de Amostras VNA{% endblock %}
+
+{% block content %}
     <div class="primeiro-centralizado">
         <h1>Analisador de Amostras VNA</h1>
         <h2 class="texto-cinza">Selecione a opção correspondente à sua amostra:</h2>
@@ -29,13 +10,6 @@
 
     <div class="links-container">
         <a href="/enviar-arquivo" class="link">Análise com 1 camada</a>
-        <a href="/primeiroarquivoduo" class="link">Análise com 2 camadas</a>
-        <a href="/primeiroarquivo" class="link">Análise com 3 camadas</a>
-    </div>
-    <br/>
-    <div class="links-container">
-        <a href="/arquivocoaxial" class="link">Análise coaxial</a>
-        <a href="/gerarxml" class="link">Gerar arquivo XML</a>
     </div>
 
     <div class="segundo-centralizado">
@@ -45,11 +19,4 @@
         <p><b>3. </b>Cabeçalho como apresentado no exemplo abaixo</p>
         <img src="{{ url_for('static', filename='images/inicial.png') }}" alt="Imagem de exemplo">
     </div>
-
-    <footer>
-        <p>Agradecimento: PIBIC/CNPq processo nº 101700/2024-5 - Instituto Nacional de Pesquisas Espaciais</p>
-        <p>Todos os direitos reservados</p>
-    </footer>
-
-</body>
-</html>
+{% endblock %}
