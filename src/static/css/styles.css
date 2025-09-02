@@ -87,14 +87,14 @@ main {
     background-color: #0056b3;
 }
 
-.primeiro-centralizado {
+.apresentacao-ferramenta {
     width: 50%;
     margin: auto; /* Centraliza horizontalmente */
     text-align: center; /* Centraliza o texto dentro deste contêiner */
     padding: 20px;
 }
 
-.segundo-centralizado {
+.instrucoes-home {
     width: 50%;
     margin: auto; /* Centraliza horizontalmente */
     text-align: center; /* Centraliza o texto dentro deste contêiner */
