@@ -1,5 +1,6 @@
 /* styles.css */
-html { height: 100%; }  /* opcional, mas ok */
+html { height: 100%; }
+
 body{
     min-height: 100vh;
     margin: 0;
@@ -8,7 +9,7 @@ body{
 }
 
 header {
-    background-color: #033c79; /* Azul */
+    background-color: #033c79;
     padding: 20px;
     text-align: left;
     color: #fff;
@@ -20,7 +21,7 @@ main {
     flex: 1;
 }
 
-.btn {
+.btn-link {
     background-color: #033c79;
     color: #fff;
     border: none;
@@ -34,7 +35,7 @@ main {
     cursor: pointer;
 }
 
-.btn:hover {
+.btn-link:hover {
     background-color: #0056b3;
 }
 
@@ -67,12 +68,12 @@ main {
 }
 
 .links-container {
-    display: flex; /* Ativa o modo Flexbox */
+    display: flex;
     justify-content: center;
     gap: 20px; /* Adiciona um espaçamento entre os links */
 }
 
-.link {
+.link-home {
     font-family: "Helvetica", Arial, sans-serif;
     font-size: 18px;
     text-decoration: none; /* Remove o sublinhado do link */
@@ -82,7 +83,7 @@ main {
     border-radius: 5px;
 }
 
-.link:hover {
+.link-home:hover {
     background-color: #0056b3;
 }
 
@@ -110,4 +111,20 @@ footer{
 
 .texto-cinza {
     color: rgb(54, 50, 50);
+}
+
+button {
+    background-color: #033c79;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
