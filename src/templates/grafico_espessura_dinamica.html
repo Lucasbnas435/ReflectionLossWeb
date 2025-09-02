@@ -3,7 +3,12 @@
 {% block title %}Gráfico - VNA{% endblock %}
 
 {% block content %}
-    <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}?t={{ timestamp }}">
+    <form action="{{ rota_informacoes }}" method="post">
+        <button type="submit">Retornar ao menu</button>
+    </form>
+    <div class="grafico-container">
+        <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}?t={{ timestamp }}">
+    </div>
 
     <form action= "{{ rota_grafico }}" method="post">
         Espessura mínima em mm: <input type="number" name="inicio_slider" step="any" value="{{ inicio_slider }}" required="true"><br>
@@ -14,9 +19,5 @@
 
     <form action="{{ rota_grafico }}" method="post">
         <button type="submit">Baixar dados do gráfico</button>
-    </form>
-
-    <form action="{{ rota_informacoes }}" method="post">
-        <button type="submit">Retornar ao menu</button>
     </form>
 {% endblock %}

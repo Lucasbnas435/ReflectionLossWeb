@@ -3,14 +3,15 @@
 {% block title %}Gráfico - VNA{% endblock %}
 
 {% block content %}
-    <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}">
+    <form action="{{ rota_informacoes }}" method="post">
+        <button type="submit">Retornar ao menu</button>
+    </form>
+    <div class="grafico-container">
+        <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}">
+    </div>
 
     <form action="{{ rota_grafico }}" method="post">
         <input type="hidden" name="baixar_grafico" value="1">
         <button type="submit">Baixar dados do gráfico</button>
-    </form>
-
-    <form action="{{ rota_informacoes }}" method="post">
-        <button type="submit">Retornar ao menu</button>
     </form>
 {% endblock %}
