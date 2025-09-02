@@ -139,3 +139,31 @@ button:hover {
     height: auto;
     display: inline-block;
 }
+
+.controles-grafico {
+    text-align: center;   /* centraliza o conteúdo */
+    margin-top: 20px;
+}
+
+.controles-grafico form {
+    display: block;       /* cada form ocupa uma linha */
+    margin: 15px auto;    /* centraliza e dá espaçamento */
+    text-align: center;
+    max-width: 400px;     /* largura máxima para não esticar muito */
+}
+
+/* Cada campo do formulário ganha espaçamento vertical */
+.controles-grafico .campo-input {
+    margin-bottom: 12px;
+}
+
+.slider-container {
+    display: flex;          /* coloca slider e texto lado a lado */
+    align-items: center;    /* alinha verticalmente no centro */
+    gap: 10px;              /* espaço entre slider e texto */
+    justify-content: center; /* mantém tudo centralizado */
+}
+
+.slider-text {
+    white-space: nowrap; /* evita quebrar o texto */
+}

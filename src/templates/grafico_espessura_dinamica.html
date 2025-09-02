@@ -10,14 +10,24 @@
         <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}?t={{ timestamp }}">
     </div>
 
-    <form action= "{{ rota_grafico }}" method="post">
-        Espessura mínima em mm: <input type="number" name="inicio_slider" step="any" value="{{ inicio_slider }}" required="true"><br>
-        Espessura máxima em mm: <input type="number" name="fim_slider" step="any" value="{{ fim_slider }}" required="true"><br>
-        <input type="range" id="espessura_amostra" name="espessura_amostra" min="{{ inicio_slider }}" max="{{ fim_slider }}" step="0.001" value="{{ espessura_amostra }}" onchange=submit()>
-        <label for="espessura_amostra">Espessura: {{ espessura_amostra }} mm</label>
-    </form>
+    <div class="controles-grafico">
+        <form action="{{ rota_grafico }}" method="post">
+            <button type="submit">Baixar dados do gráfico</button>
+        </form>
 
-    <form action="{{ rota_grafico }}" method="post">
-        <button type="submit">Baixar dados do gráfico</button>
-    </form>
+        <form action= "{{ rota_grafico }}" method="post">
+            <div class="campo-input">
+                Espessura mínima em mm: <input type="number" name="inicio_slider" step="any" value="{{ inicio_slider }}" required="true">
+            </div>
+
+            <div class="campo-input">
+                Espessura máxima em mm: <input type="number" name="fim_slider" step="any" value="{{ fim_slider }}" required="true">
+            </div>
+
+            <div class="campo slider-container">
+                <input type="range" id="espessura_amostra" name="espessura_amostra" min="{{ inicio_slider }}" max="{{ fim_slider }}" step="0.001" value="{{ espessura_amostra }}" onchange=submit()>
+                <span class="slider-text">Espessura: {{ espessura_amostra }} mm</span>
+            </div>
+        </form>
+    </div>
 {% endblock %}
