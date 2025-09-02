@@ -1,25 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
+{% extends "base.html" %}
 
-<body>
-    <header>
-        <b>Analisador de Amostras VNA |</b>
-        <a href="/" class="btn">Home</a>
-        <a href="/enviar-arquivo" class="btn">1 camada</a>
-        <a href="/primeiroarquivoduo" class="btn">2 camadas</a>
-        <a href="/primeiroarquivo" class="btn">3 camadas</a>
-        <a href="/arquivocoaxial" class="btn">Coaxial</a>
-        <a href="/arquivocoaxial" class="btn">Coaxial</a>
-        <a href="/gerarxml" class="btn">Gerar XML</a>
-        <div class="images">
-            <img src="{{ url_for('static', filename='images/logoINPE.png') }}" alt="Logotipo do INPE">
-            <img src="{{ url_for('static', filename='images/logoFATEC.png') }}" alt="Logotipo da FATEC Taubate">
-        </div>
-    </header>
+{% block title %}Informações - Analisador de Amostras VNA{% endblock %}
 
+{% block content %}
     <h3><font color="#033c79">Passo 1:</font> Verifique se as informações da amostra condizem com sua análise:</h3>
     <h4>Nome do arquivo: {{ nome_arquivo_csv }}</h4>
 
@@ -81,9 +64,4 @@
         Espessura máxima em mm: <input type="number" name="fim_slider" step="0.001" required="true"><br>
         <button type="submit">Clique aqui para gráfico R.L. dinâmico</button>
     </form>
-    <footer>
-        <p>Agradecimento: PIBIC/CNPq processo nº 101700/2024-5 - Instituto Nacional de Pesquisas Espaciais</p>
-        <p>Todos os direitos reservados</p>
-    </footer>
-</body>
-</html>
+{% endblock %}
