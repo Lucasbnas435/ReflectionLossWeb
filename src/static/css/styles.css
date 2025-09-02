@@ -128,3 +128,14 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+.grafico-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.grafico-container img {
+    max-width: 90%;
+    height: auto;
+    display: inline-block;
+}
