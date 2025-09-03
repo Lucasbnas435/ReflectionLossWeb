@@ -3,65 +3,79 @@
 {% block title %}Informações - VNA{% endblock %}
 
 {% block content %}
-    <h3><font color="#033c79">Passo 1:</font> Verifique se as informações da amostra condizem com sua análise:</h3>
-    <h4>Nome do arquivo: {{ nome_arquivo_csv }}</h4>
+    <div class="informacoes-container">
+        <h3><font color="#033c79">Passo 1:</font> Verifique se as informações da amostra condizem com sua análise:</h3>
 
-    <table>
-        <tr>
-            <th><b>Informações da amostra analisada</b></th>
-        </tr>
-        <tr>
-            <td>Frequência de Corte:</td>
-            <td>{{ frequencia_corte }} {{ unidade_frequencia }}</td>
-        </tr>
-        <tr>
-            <td>Comprimento do suporte da amostra (Offset):</td>
-            <td>{{ comprimento_suporte_amostra }} mm</td>
-        </tr>
-        <tr>
-            <td>Distância da amostra:</td>
-            <td>{{ distancia_amostra }} mm</td>
-        </tr>
-        <tr>
-            <td>Espessura da amostra:</td>
-            <td>{{ espessura_amostra }} mm</td>
-        </tr>
-        <tr>
-            <td>IFBW:</td>
-            <td>{{ ifbw }} Hz</td>
-        </tr>
-        <tr>
-            <td>Power:</td>
-            <td>{{ power }} dBm</td>
-        </tr>
-        <tr>
-            <td>Banda:</td>
-            <td>{{ nome_banda }}</td>
-        </tr>
-    </table>
+        <table class="tabela-centralizada">
+            <tr>
+                <th colspan="2"><b>Arquivo: {{ nome_arquivo_csv }}</b></th>
+            </tr>
+            <tr>
+                <th colspan="2"><b>Informações da Amostra Analisada</b></th>
+            </tr>
+            <tr>
+                <td>Frequência de corte</td>
+                <td>{{ frequencia_corte }} {{ unidade_frequencia }}</td>
+            </tr>
+            <tr>
+                <td>Comprimento do suporte da amostra (offset)</td>
+                <td>{{ comprimento_suporte_amostra }} mm</td>
+            </tr>
+            <tr>
+                <td>Distância da amostra</td>
+                <td>{{ distancia_amostra }} mm</td>
+            </tr>
+            <tr>
+                <td>Espessura da amostra</td>
+                <td>{{ espessura_amostra }} mm</td>
+            </tr>
+            <tr>
+                <td>IFBW</td>
+                <td>{{ ifbw }} Hz</td>
+            </tr>
+            <tr>
+                <td>Power</td>
+                <td>{{ power }} dBm</td>
+            </tr>
+            <tr>
+                <td>Banda</td>
+                <td>{{ nome_banda }}</td>
+            </tr>
+        </table>
 
-    <form action="/grafico/mi-epsilon" method="post">
-        <h3><font color="#033c79">Passo 2:</font> Plotar gráfico de &mu; (permeabilidade magnética relativa) e &epsilon; (permissividade elétrica relativa) em função da frequência</h3>
-        <button type="submit">Clique aqui para gráfico de permeabilidade e permissividade</button>
-    </form>
+        <form action="/grafico/mi-epsilon" method="post">
+            <h3><font color="#033c79">Passo 2:</font> Plotar gráfico de &mu; (permeabilidade magnética relativa) e &epsilon; (permissividade elétrica relativa) em função da frequência</h3>
+            <button type="submit">Clique aqui para gráfico de permeabilidade e permissividade</button>
+        </form>
 
-    <form action="/grafico/rl-espessura-fixa" method="post">
-        <h3><font color="#033c79">Passo 3:</font> Plotar gráfico de Perda por Reflexão versus frequência com espessura fixa</h3>
-        <button type="submit">Clique aqui para gráfico R.L. espessura fixa</button>
-    </form>
+        <form action="/grafico/rl-espessura-fixa" method="post">
+            <h3><font color="#033c79">Passo 3:</font> Plotar gráfico de Perda por Reflexão versus frequência com espessura fixa</h3>
+            <button type="submit">Clique aqui para gráfico R.L. espessura fixa</button>
+        </form>
 
-    <form action="/grafico/rl-espessura-variavel" method="post">
-        <h3><font color="#033c79">Passo 4:</font> Plotar gráfico de Perda por Reflexão versus frequência com espessura variável</h3>
-        Espessura inicial em mm: <input type="number" name="inicio" step="0.001" required="true"><br>
-        Espessura final em mm: <input type="number" name="fim" step="0.001" required="true"><br>
-        Variação em mm: <input type="number" name="passo" step="0.001" required="true"><br>
-        <button type="submit">Clique aqui para gráfico R.L. espessura variável</button>
-    </form>
+        <form action="/grafico/rl-espessura-variavel" method="post">
+            <h3><font color="#033c79">Passo 4:</font> Plotar gráfico de Perda por Reflexão versus frequência com espessura variável</h3>
+            <div class="input-grupo">
+            Espessura inicial em mm: <input type="number" name="inicio" step="0.001" required="true">
+            </div>
+            <div class="input-grupo">
+                Espessura final em mm: <input type="number" name="fim" step="0.001" required="true">
+            </div>
+            <div class="input-grupo">
+                Variação em mm: <input type="number" name="passo" step="0.001" required="true">
+            </div>
+            <button type="submit">Clique aqui para gráfico R.L. espessura variável</button>
+        </form>
 
-    <form action="/grafico/rl-espessura-dinamica" method="post">
-        <h3><font color="#033c79">Passo 5:</font> Plotar gráfico de Perda por Reflexão dinâmico</h3>
-        Espessura mínima em mm: <input type="number" name="inicio_slider" step="0.001" required="true"><br>
-        Espessura máxima em mm: <input type="number" name="fim_slider" step="0.001" required="true"><br>
-        <button type="submit">Clique aqui para gráfico R.L. dinâmico</button>
-    </form>
+        <form action="/grafico/rl-espessura-dinamica" method="post">
+            <h3><font color="#033c79">Passo 5:</font> Plotar gráfico de Perda por Reflexão dinâmico</h3>
+            <div class="input-grupo">
+                Espessura mínima em mm: <input type="number" name="inicio_slider" step="0.001" required="true">
+            </div>
+            <div class="input-grupo">
+                Espessura máxima em mm: <input type="number" name="fim_slider" step="0.001" required="true">
+            </div>
+            <button type="submit">Clique aqui para gráfico R.L. dinâmico</button>
+        </form>
+    </div>
 {% endblock %}

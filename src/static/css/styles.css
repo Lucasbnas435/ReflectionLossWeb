@@ -167,3 +167,32 @@ button:hover {
 .slider-text {
     white-space: nowrap; /* evita quebrar o texto */
 }
+
+.informacoes-container {
+    padding-left: 20px;   /* aplica margem à esquerda para todos os elementos dentro */
+    margin-top: 20px;
+}
+
+/* Mantém a tabela centralizada */
+.tabela-centralizada {
+    margin: 0 auto 30px auto;
+    border-collapse: collapse;
+    width: 40%;
+}
+
+.tabela-centralizada th {
+    text-align: center;
+    border: 1px solid #033c79;
+    padding: 10px;
+}
+
+.tabela-centralizada td {
+    border: 1px solid #033c79;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Espaçamento entre inputs */
+.input-grupo {
+    margin-bottom: 10px;
+}
