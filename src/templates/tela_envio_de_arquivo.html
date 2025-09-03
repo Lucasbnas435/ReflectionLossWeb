@@ -3,14 +3,16 @@
 {% block title %}Enviar Arquivo - VNA{% endblock %}
 
 {% block content %}
-    <h2><b>Para começar a análise siga este passo:</b></h2>
-    <h3>Qual é o arquivo .csv da sua amostra analisada no VNA?</h3>
 
-    <form method='POST' enctype='multipart/form-data'>
-        {{form.hidden_tag()}}
-        {{form.file()}}
-        {{form.submit()}}
-    </form>
+    <div class="instrucoes-home">
+        <h2>Selecione o arquivo CSV da amostra analisada no VNA</h2>
+        
+        <img src="{{ url_for('static', filename='images/simples.PNG') }}" alt="Descrição da Imagem"  width="640" height="360">
 
-    <img src="{{ url_for('static', filename='images/simples.PNG') }}" alt="Descrição da Imagem"  width="640" height="360">
+        <form method='POST' enctype='multipart/form-data'>
+            {{form.hidden_tag()}}
+            {{form.file()}}
+            {{form.submit()}}
+        </form>
+    </div>
 {% endblock %}
