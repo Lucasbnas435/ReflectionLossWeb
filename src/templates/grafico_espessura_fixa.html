@@ -10,8 +10,10 @@
         <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}">
     </div>
 
-    <form action="{{ rota_grafico }}" method="post">
-        <input type="hidden" name="baixar_grafico" value="1">
-        <button type="submit">Baixar dados do gráfico</button>
-    </form>
+    <div class="controles-grafico">
+        <form action="{{ rota_grafico }}" method="post">
+            <input type="hidden" name="baixar_grafico" value="1">
+            <button type="submit">Baixar dados do gráfico</button>
+        </form>
+    </div>
 {% endblock %}
