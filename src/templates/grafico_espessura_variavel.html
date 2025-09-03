@@ -9,8 +9,10 @@
     <div class="grafico-container">
         <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}">
     </div>
-    <h3>Curva de menor RL: Espessura {{curva_menor_y}} mm</h3>
-    <form action="{{ rota_grafico }}" method="post">
-        <button type="submit">Baixar dados do gráfico</button>
-    </form>
+    <div class="controles-grafico">
+        <h3>Curva de menor RL: Espessura {{curva_menor_y}} mm</h3>
+        <form action="{{ rota_grafico }}" method="post">
+            <button type="submit">Baixar dados do gráfico</button>
+        </form>
+    </div>
 {% endblock %}
