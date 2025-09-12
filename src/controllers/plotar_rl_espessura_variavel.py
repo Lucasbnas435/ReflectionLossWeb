@@ -19,22 +19,13 @@ def plotar_rl_espessura_variavel(
     baixar_grafico: bool,
     coaxial: bool = False,
 ):
-    # menor_y = 99999999
-    # curva_menor_y = float()
-
     with open(caminho_arquivo_txt, "r") as arquivo_txt:
         conteudo_arquivo_txt = arquivo_txt.readlines()
 
-    # # Entrada do passo
-    # inicio = inicio * 1e-3
-    # fim = fim * 1e-3 + 0.001e-3
-    # passo = passo * 1e-3
-    # menores_valores_rl = []
-
     fig = plt.figure(figsize=(10, 5))
 
-    frequencias_resultante = []
-    s11_v_resultante = []
+    menor_rl_global = float("inf")
+    espessura_menor_rl = float("inf")
 
     for espessura in np.arange(inicio, fim, passo):
         espessura = round(espessura, 3)
@@ -44,8 +35,10 @@ def plotar_rl_espessura_variavel(
             espessura_amostra=espessura,
         )
 
-        frequencias_resultante.append(frequencias_plotagem)
-        s11_v_resultante.append(s11_v)
+        menor_rl_da_curva = min(s11_v)
+        if menor_rl_da_curva < menor_rl_global:
+            menor_rl_global = menor_rl_da_curva
+            espessura_menor_rl = espessura
 
         # Dados para serem Plotados
         plt.plot(frequencias_plotagem, s11_v, label=str(espessura))
@@ -120,7 +113,7 @@ def plotar_rl_espessura_variavel(
         rota_informacoes = "/informacoescoaxial"
 
     dados_view = {
-        # "curva_menor_y": curva_menor_y,
+        "espessura_menor_rl": espessura_menor_rl,
         "rota_grafico": rota_grafico,
         "rota_informacoes": rota_informacoes,
         "caminho_imagem": caminho_imagem,
