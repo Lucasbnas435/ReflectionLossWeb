@@ -26,7 +26,7 @@ class Grafico(ABC):
         """
 
     @abstractmethod
-    def _ler_dados_arquivo(self) -> list[str]:
+    def _ler_dados_arquivo(self) -> list[str] | tuple[list]:
         """
         Extrai os dados do arquivo .txt gerado com base no arquivo .csv obtido com o Vector Network Analyzer (VNA).
 
@@ -35,7 +35,8 @@ class Grafico(ABC):
         Reflexão (Reflection Loss).
 
         Returns:
-            list[str]: Lista em que cada elemento é uma linha do arquivo txt.
+            list[str] | tuple: Lista em que cada elemento é uma linha do arquivo txt ou
+                tupla com múltiplas listas com conteúdo do arquivo txt.
         """
 
     @abstractmethod
