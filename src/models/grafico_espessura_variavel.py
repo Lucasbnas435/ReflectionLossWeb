@@ -11,7 +11,7 @@ class GraficoEspessuraVariavel(GraficoReflectionLoss):
     def plotar_grafico(
         self, inicio: float = 1.0, fim: float = 10.0, passo: float = 1.0
     ):
-        conteudo_arquivo_txt = self._ler_dados_arquivo()
+        conteudo_arquivo_txt = self._ler_dados_arquivo_txt()
 
         fig = plt.figure(figsize=(10, 5))
 

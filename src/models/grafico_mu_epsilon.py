@@ -19,7 +19,7 @@ class GraficoMuEpsilon(Grafico):
         self._unidade_frequencia = unidade_frequencia
         self._identificador_arquivo = identificador_arquivo
 
-    def _ler_dados_arquivo(self) -> tuple:
+    def _ler_dados_arquivo_txt(self) -> tuple:
         try:
             dados = np.loadtxt(self._caminho_arquivo_txt)
         except Exception as e:

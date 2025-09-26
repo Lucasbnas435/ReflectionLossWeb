@@ -13,7 +13,7 @@ class GraficoEspessuraDinamica(GraficoReflectionLoss):
         inicio_slider: float = 1.0,
         fim_slider: float = 10.0,
     ):
-        conteudo_arquivo_txt = self._ler_dados_arquivo()
+        conteudo_arquivo_txt = self._ler_dados_arquivo_txt()
 
         frequencias_plotagem, s11_v = self._calcular_rl(
             conteudo_arquivo_txt=conteudo_arquivo_txt,

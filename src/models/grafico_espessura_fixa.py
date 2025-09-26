@@ -23,7 +23,7 @@ class GraficoEspessuraFixa(GraficoReflectionLoss):
         self._espessura_amostra = espessura_amostra
 
     def plotar_grafico(self) -> dict:
-        conteudo_arquivo_txt = self._ler_dados_arquivo()
+        conteudo_arquivo_txt = self._ler_dados_arquivo_txt()
 
         frequencias_plotagem, s11_v = self._calcular_rl(
             conteudo_arquivo_txt=conteudo_arquivo_txt,

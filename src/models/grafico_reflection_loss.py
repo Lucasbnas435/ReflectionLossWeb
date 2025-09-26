@@ -28,7 +28,7 @@ class GraficoReflectionLoss(Grafico, ABC):
         self._unidade_frequencia = unidade_frequencia
         self._identificador_arquivo = identificador_arquivo
 
-    def _ler_dados_arquivo(self) -> list[str]:
+    def _ler_dados_arquivo_txt(self) -> list[str]:
         """
         Extrai os dados do arquivo .txt gerado com base no arquivo .csv obtido com o Vector Network Analyzer (VNA).
 
