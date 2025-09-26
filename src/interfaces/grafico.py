@@ -26,7 +26,7 @@ class Grafico(ABC):
         """
 
     @abstractmethod
-    def _ler_dados_arquivo(self) -> list[str] | tuple[list]:
+    def _ler_dados_arquivo(self) -> list[str] | tuple:
         """
         Extrai os dados do arquivo .txt gerado com base no arquivo .csv obtido com o Vector Network Analyzer (VNA).
 
