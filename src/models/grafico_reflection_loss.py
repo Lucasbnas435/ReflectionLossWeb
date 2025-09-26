@@ -42,7 +42,7 @@ class GraficoReflectionLoss(Grafico, ABC):
         with open(self._caminho_arquivo_txt, "r") as arquivo_txt:
             return arquivo_txt.readlines()
 
-    def calcular_rl(
+    def _calcular_rl(
         self, conteudo_arquivo_txt: list[str], espessura_amostra: float
     ) -> tuple[list[float], list[float]]:
         # Ajuste da Referencia de L1 e L2

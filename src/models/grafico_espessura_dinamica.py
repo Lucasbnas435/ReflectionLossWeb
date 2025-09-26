@@ -15,7 +15,7 @@ class GraficoEspessuraDinamica(GraficoReflectionLoss):
     ):
         conteudo_arquivo_txt = self._ler_dados_arquivo()
 
-        frequencias_plotagem, s11_v = self.calcular_rl(
+        frequencias_plotagem, s11_v = self._calcular_rl(
             conteudo_arquivo_txt=conteudo_arquivo_txt,
             espessura_amostra=espessura_amostra,
         )

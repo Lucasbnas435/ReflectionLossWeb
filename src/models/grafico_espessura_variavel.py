@@ -21,7 +21,7 @@ class GraficoEspessuraVariavel(GraficoReflectionLoss):
         for espessura in np.arange(inicio, fim, passo):
             espessura = round(espessura, 3)
 
-            frequencias_plotagem, s11_v = self.calcular_rl(
+            frequencias_plotagem, s11_v = self._calcular_rl(
                 conteudo_arquivo_txt=conteudo_arquivo_txt,
                 espessura_amostra=espessura,
             )
