@@ -28,6 +28,20 @@ class GraficoReflectionLoss(Grafico, ABC):
         self._unidade_frequencia = unidade_frequencia
         self._identificador_arquivo = identificador_arquivo
 
+    def _ler_dados_arquivo(self) -> list[str]:
+        """
+        Extrai os dados do arquivo .txt gerado com base no arquivo .csv obtido com o Vector Network Analyzer (VNA).
+
+        O arquivo contém os dados da medição realizada, além da Permeabilidade Magnética e
+        Permissividade Elétrica por frequência, necessária para o cálculo da Perda por
+        Reflexão (Reflection Loss).
+
+        Returns:
+            list[str]: Lista em que cada elemento é uma linha do arquivo txt.
+        """
+        with open(self._caminho_arquivo_txt, "r") as arquivo_txt:
+            return arquivo_txt.readlines()
+
     def calcular_rl(
         self, conteudo_arquivo_txt: list[str], espessura_amostra: float
     ) -> tuple[list[float], list[float]]:
