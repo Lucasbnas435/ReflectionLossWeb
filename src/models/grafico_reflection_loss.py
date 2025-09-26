@@ -3,10 +3,31 @@ from typing import Any
 
 import numpy as np
 
-from src.models.grafico_base import GraficoBase
+from src.interfaces.grafico import Grafico
 
 
-class GraficoReflectionLoss(GraficoBase, ABC):
+class GraficoReflectionLoss(Grafico, ABC):
+    def __init__(
+        self,
+        nome_arquivo_csv: str,
+        caminho_arquivo_txt: str,
+        unidade_frequencia: str,
+        identificador_arquivo: str,
+    ):
+        """
+        Construtor da classe abstrata GraficoReflectionLoss.
+
+        Args:
+            nome_arquivo_csv (str): Nome do arquivo csv que foi enviado pelo usuário.
+            caminho_arquivo_txt (str): Caminho do arquivo txt que será lido.
+            unidade_frequencia (str): Unidade de medida da frequência.
+            identificador_arquivo (str): Identificador único dos arquivos .csv e .txt.
+        """
+        self._nome_arquivo_csv = nome_arquivo_csv
+        self._caminho_arquivo_txt = caminho_arquivo_txt
+        self._unidade_frequencia = unidade_frequencia
+        self._identificador_arquivo = identificador_arquivo
+
     def calcular_rl(
         self, conteudo_arquivo_txt: list[str], espessura_amostra: float
     ) -> tuple[list[float], list[float]]:
@@ -74,8 +95,8 @@ class GraficoReflectionLoss(GraficoBase, ABC):
 
     @abstractmethod
     def plotar_grafico(self) -> dict[str, Any]:
-        """Método obrigatório, conforme definido em GraficoBase."""
+        """Método documentado na interface Grafico."""
 
     @abstractmethod
     def baixar_dados_grafico(self) -> str:
-        """Método obrigatório, conforme definido em GraficoBase."""
+        """Método documentado na interface Grafico."""
