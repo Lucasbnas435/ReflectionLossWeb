@@ -56,3 +56,56 @@ class GraficoEspessuraVariavel(GraficoReflectionLoss):
         }
 
         return dados_plotagem
+
+    def baixar_dados_grafico(
+        self,
+        inicio: float = 1.0,
+        fim: float = 10.0,
+        passo: float = 1.0,
+    ):
+        frequencias_agrupamento = (
+            list()
+        )  # armazena as frequencias (valores x) do gráfico para gerar arquivo único
+        s11_v_agrupadas = []  # armazena todos os valores de RL do gráfico
+
+        for espessura in np.arange(inicio, fim, passo):
+            espessura = round(espessura, 3)
+
+            # Criando arquivo individual para cada espessura
+            with open(
+                f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{self._identificador_arquivo}/mm_{espessura}mm.txt",
+                "w",
+                encoding="utf-8",
+            ) as arquivo_grafico_individual:
+                # Cabeçalho do arquivo enviado para download
+                arquivo_grafico_individual.write(
+                    f"Freq ({self._unidade_frequencia}) RL(dB)"
+                )
+
+                frequencias_plotagem, s11_v = self._calcular_rl(
+                    conteudo_arquivo_txt=self._ler_dados_arquivo_txt(),
+                    espessura_amostra=espessura,
+                )
+
+                # Salva dados para arquivo com todas as espessuras
+                frequencias_agrupamento = frequencias_plotagem
+                s11_v_agrupadas.append(s11_v)
+
+                # Grava dados no arquivo individual
+                for frequencia, rl in zip(frequencias_plotagem, s11_v):
+                    arquivo_grafico_individual.write(
+                        f"{frequencia:.2f} {rl:.2f}"
+                    )
+
+        dados_grafico_agrupado = frequencias_agrupamento + s11_v_agrupadas
+
+        # Criando arquivo único com todas as espessuras
+        with open(
+            f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{self._identificador_arquivo}/todos.txt",
+            "w",
+            encoding="utf-8",
+        ) as arquivo_grafico_agrupado:
+            for dados in zip(*dados_grafico_agrupado):
+                arquivo_grafico_agrupado.write(
+                    "\t".join(map(str, dados)) + "\n"
+                )
