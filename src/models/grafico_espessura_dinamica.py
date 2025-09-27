@@ -46,3 +46,28 @@ class GraficoEspessuraDinamica(GraficoReflectionLoss):
         }
 
         return dados_plotagem
+
+    def baixar_dados_grafico(
+        self,
+        espessura_amostra: float = 1.0,
+    ):
+        with open(
+            f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{self._identificador_arquivo}/mm_{round(espessura_amostra, 2)}mm.txt",
+            "w",
+            encoding="utf-8",
+        ) as arquivo_dados_grafico:
+
+            # Cabeçalho do arquivo enviado para download
+            arquivo_dados_grafico.write(
+                f"Freq {self._unidade_frequencia} RL(dB)"
+            )
+
+            frequencias_plotagem, s11_v = self._calcular_rl(
+                conteudo_arquivo_txt=self._ler_dados_arquivo_txt(),
+                espessura_amostra=espessura_amostra,
+            )
+
+            for frequencia, rl in zip(frequencias_plotagem, s11_v):
+                arquivo_dados_grafico.write(f"{frequencia:.2f} {rl:.2f}")
+
+        return f"mm_{round(espessura_amostra, 2)}mm.txt"
