@@ -1,124 +1,31 @@
-import os
-from datetime import datetime
+from flask import Blueprint, render_template, request, session
 
-import matplotlib.pyplot as plt
-import numpy as np
-from flask import render_template
+from src.models.grafico_espessura_variavel import GraficoEspessuraVariavel
 
-from src.use_cases.calcular_rl import calcular_rl
+plotar_rl_espessura_variavel_bp = Blueprint(
+    "plotar_rl_espessura_variavel", __name__, url_prefix="/grafico"
+)
 
 
-def plotar_rl_espessura_variavel(
-    nome_arquivo_csv: str,
-    caminho_arquivo_txt: str,
-    unidade_frequencia: str,
-    identificador_arquivo: str,
-    inicio: float,
-    fim: float,
-    passo: float,
-    baixar_grafico: bool,
-    coaxial: bool = False,
-):
-    with open(caminho_arquivo_txt, "r") as arquivo_txt:
-        conteudo_arquivo_txt = arquivo_txt.readlines()
+@plotar_rl_espessura_variavel_bp.route(
+    "/rl-espessura-variavel", methods=["GET", "POST"]
+)
+def plotar_rl_espessura_variavel():
+    inicio = float(request.form.get("inicio", 0.1))
+    fim = float(request.form.get("fim", 10.0))
+    passo = float(request.form.get("passo", 1.0))
 
-    fig = plt.figure(figsize=(10, 5))
+    grafico_espessura_variavel = GraficoEspessuraVariavel(
+        nome_arquivo_csv=session.get("nome_arquivo_csv", ""),
+        caminho_arquivo_txt=session.get("caminho_arquivo_txt", ""),
+        unidade_frequencia=session.get("unidade_frequencia", ""),
+        identificador_arquivo=session.get("identificador_arquivo", ""),
+    )
 
-    menor_rl_global = float("inf")
-    espessura_menor_rl = float("inf")
+    dados_plotagem = grafico_espessura_variavel.plotar_grafico(
+        inicio=inicio,
+        fim=fim,
+        passo=passo,
+    )
 
-    for espessura in np.arange(inicio, fim, passo):
-        espessura = round(espessura, 3)
-
-        frequencias_plotagem, s11_v = calcular_rl(
-            conteudo_arquivo_txt=conteudo_arquivo_txt,
-            espessura_amostra=espessura,
-        )
-
-        menor_rl_da_curva = min(s11_v)
-        if menor_rl_da_curva < menor_rl_global:
-            menor_rl_global = menor_rl_da_curva
-            espessura_menor_rl = espessura
-
-        # Dados para serem Plotados
-        plt.plot(frequencias_plotagem, s11_v, label=str(espessura))
-        """
-        if baixar_grafico:
-            contador = 0  # para impressao da matriz de resultados
-            matriz = []  # matriz contendo todos rersultados obtidos
-            matrizind = []  # cabecalho
-            espessura = round(espessura / 1e-3, 2)
-            grav = open(
-                f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}/mm_{espessura}mm.txt",
-                "w",
-            )
-            titulo = "%4s(%3s)  %s\n" % ("Freq", unidade_frequencia, "RL(dB)")
-            grav.write(titulo)
-
-            coluna0 = []  # primeira coluna matriz
-            colunan = []  # demais colunas matriz
-            for i in range(0, len(F)):
-                escrever = "%.2f %.2f\n" % (F[i], s11_v[i])
-                grav.write(escrever)
-                if contador == 0:  # insercao primeira coluna matriz
-                    coluna0.append(F[i])
-                colunan.append(s11_v[i])  # insercao valores matriz
-
-            # Gravando matriz de resultados
-            if contador == 0:
-                matrizind.append("Freq(%3s)" % unidade_frequencia)
-                matriz.append(coluna0)  # insercao primeira coluna matriz
-            matrizind.append("%s(mm)" % espessura)
-            matriz.append(colunan)  # insercao valores matriz
-            contador = contador + 1
-
-            grav.close()
-        """
-
-    """
-    # Imprimindo arquivos Todos
-    if baixar_grafico:
-        arquivo = open(
-            f"./pythonPaginaINPE/static/files/saidas/saidas_{identificador_arquivo}/Todos.txt",
-            "w",
-            encoding="utf-8",
-        )
-        for i in range(len(matrizind)):
-            escrever = "%s " % matrizind[i]
-            arquivo.write(escrever)
-        arquivo.write("\n")
-        for j in range(len(matriz[0])):
-            for i in range(len(matriz)):
-                escrever = "%.2f " % matriz[i][j]
-                arquivo.write(escrever)
-            arquivo.write("\n")
-        arquivo.close()
-        return ""
-    """
-
-    # Plotando grafico
-    plt.legend(title="Espessura (mm)")
-    plt.xlabel(f"Frequência ({unidade_frequencia})")
-    plt.ylabel("Perda por Reflexão (dB)")
-    plt.title(f"Arquivo: {nome_arquivo_csv}")
-
-    nome_arquivo_imagem = f"rl_epessura_variavel_{identificador_arquivo}.png"
-    caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/graficos_gerados/{nome_arquivo_imagem}"
-    fig.savefig(caminho_imagem)
-
-    rota_grafico = "/grafico/rl-espessura-variavel"
-    rota_informacoes = "/informacoes"
-    if coaxial:
-        rota_grafico = "/rlespvarcoaxial"
-        rota_informacoes = "/informacoescoaxial"
-
-    dados_view = {
-        "espessura_menor_rl": espessura_menor_rl,
-        "rota_grafico": rota_grafico,
-        "rota_informacoes": rota_informacoes,
-        "caminho_imagem": caminho_imagem,
-        "nome_arquivo_imagem": nome_arquivo_imagem,
-        "timestamp": datetime.now().timestamp(),  # usado para cache busting
-    }
-
-    return render_template("grafico_espessura_variavel.html", **dados_view)
+    return render_template("grafico_espessura_variavel.html", **dados_plotagem)
