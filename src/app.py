@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask, redirect, render_template, request, session, url_for
 from werkzeug.utils import secure_filename
 
-from src.controllers.plotar_mi_epsilon import plotar_mi_epsilon
+from src.controllers.plotar_mu_epsilon import plotar_mi_epsilon
 from src.controllers.plotar_rl_dinamico import plotar_rl_dinamico
 from src.controllers.plotar_rl_espessura_fixa import plotar_rl_espessura_fixa
 from src.controllers.plotar_rl_espessura_variavel import (
