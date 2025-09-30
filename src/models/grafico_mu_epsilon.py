@@ -73,7 +73,6 @@ class GraficoMuEpsilon(Grafico):
 
         dados_plotagem = {
             "nome_arquivo_imagem": nome_arquivo_imagem,
-            "rota_informacoes": "/informacoes",
         }
 
         return dados_plotagem

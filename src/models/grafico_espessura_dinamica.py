@@ -35,8 +35,6 @@ class GraficoEspessuraDinamica(GraficoReflectionLoss):
         fig.savefig(caminho_imagem)
 
         dados_plotagem = {
-            "rota_grafico": "/grafico/rl-espessura-dinamica",
-            "rota_informacoes": "/informacoes",
             "caminho_imagem": caminho_imagem,
             "nome_arquivo_imagem": nome_arquivo_imagem,
             "espessura_amostra": espessura_amostra,

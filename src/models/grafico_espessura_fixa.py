@@ -46,12 +46,7 @@ class GraficoEspessuraFixa(GraficoReflectionLoss):
         caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/graficos_gerados/{nome_arquivo_imagem}"
         fig.savefig(caminho_imagem)
 
-        rota_grafico = "/grafico/rl-espessura-fixa"
-        rota_informacoes = "/informacoes"
-
         dados_plotagem = {
-            "rota_grafico": rota_grafico,
-            "rota_informacoes": rota_informacoes,
             "caminho_imagem": caminho_imagem,
             "nome_arquivo_imagem": nome_arquivo_imagem,
         }

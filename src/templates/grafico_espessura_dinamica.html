@@ -11,11 +11,11 @@
     </div>
 
     <div class="controles-grafico">
-        <form action="{{ rota_grafico }}" method="post">
+        <form action="/grafico/rl-espessura-dinamica" method="post">
             <button type="submit">Baixar dados do gráfico</button>
         </form>
 
-        <form action= "{{ rota_grafico }}" method="post">
+        <form action="/grafico/rl-espessura-dinamica" method="post">
             <div class="campo-input">
                 Espessura mínima em mm: <input type="number" name="inicio_slider" step="any" value="{{ inicio_slider }}" required="true">
             </div>

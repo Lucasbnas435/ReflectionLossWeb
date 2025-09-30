@@ -48,8 +48,6 @@ class GraficoEspessuraVariavel(GraficoReflectionLoss):
 
         dados_plotagem = {
             "espessura_menor_rl": espessura_menor_rl,
-            "rota_grafico": "/grafico/rl-espessura-variavel",
-            "rota_informacoes": "/informacoes",
             "caminho_imagem": caminho_imagem,
             "nome_arquivo_imagem": nome_arquivo_imagem,
             "timestamp": datetime.now().timestamp(),  # usado para cache busting
