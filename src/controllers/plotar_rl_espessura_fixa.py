@@ -1,68 +1,24 @@
-import os
+from flask import Blueprint, render_template, session
 
-import matplotlib.pyplot as plt
-from flask import render_template
+from src.models.grafico_espessura_fixa import GraficoEspessuraFixa
 
-from src.use_cases.calcular_rl import calcular_rl
+plotar_rl_espessura_fixa_bp = Blueprint(
+    "plotar_rl_espessura_fixa", __name__, url_prefix="/grafico"
+)
 
 
-def plotar_rl_espessura_fixa(
-    nome_arquivo_csv: str,
-    caminho_arquivo_txt: str,
-    unidade_frequencia: str,
-    identificador_arquivo: str,
-    espessura_amostra: float,
-    baixar_grafico: bool,
-    coaxial: bool = False,
-):
-    with open(caminho_arquivo_txt, "r") as arquivo_txt:
-        conteudo_arquivo_txt = arquivo_txt.readlines()
-
-    frequencias_plotagem, s11_v = calcular_rl(
-        conteudo_arquivo_txt=conteudo_arquivo_txt,
-        espessura_amostra=espessura_amostra,
+@plotar_rl_espessura_fixa_bp.route(
+    "/rl-espessura-fixa", methods=["GET", "POST"]
+)
+def plotar_rl_espessura_fixa():
+    grafico_espessura_fixa = GraficoEspessuraFixa(
+        nome_arquivo_csv=session.get("nome_arquivo_csv", ""),
+        caminho_arquivo_txt=session.get("caminho_arquivo_txt", ""),
+        unidade_frequencia=session.get("unidade_frequencia", ""),
+        identificador_arquivo=session.get("identificador_arquivo", ""),
+        espessura_amostra=session.get("espessura_amostra", 1.0),
     )
 
-    if baixar_grafico:
-        # Colocar comando para retornar arquivo
-        with open(
-            f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{identificador_arquivo}/mm_{round(espessura_amostra, 2)}mm.txt",
-            "w",
-        ) as arquivo_dados_grafico:
-            # Título
-            arquivo_dados_grafico.write(f"Freq {unidade_frequencia} RL(dB)")
-            # Dados do gráfico
-            for frequencia, rl in zip(frequencias_plotagem, s11_v):
-                arquivo_dados_grafico.write(f"{frequencia:.2f} {rl:.2f}")
+    dados_plotagem = grafico_espessura_fixa.plotar_grafico()
 
-        return f"mm_{round(espessura_amostra, 2)}mm.txt"
-
-    # Plotando grafico
-    fig = plt.figure(figsize=(10, 5))
-    plt.plot(
-        frequencias_plotagem, s11_v, label=str(espessura_amostra)
-    )  # Dados para serem plotados
-    plt.legend(title="Espessura (mm)")
-    plt.xlabel(f"Frequência ({unidade_frequencia})")
-    plt.ylabel("Perda por Reflexão (dB)")
-    plt.title(f"Arquivo: {nome_arquivo_csv}")
-
-    nome_arquivo_imagem = f"rl_epessura_fixa_{identificador_arquivo}.png"
-
-    caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/graficos_gerados/{nome_arquivo_imagem}"
-    fig.savefig(caminho_imagem)
-
-    rota_grafico = "/grafico/rl-espessura-fixa"
-    rota_informacoes = "/informacoes"
-    if coaxial:
-        rota_grafico = "/rlespfixacoaxial"
-        rota_informacoes = "/informacoescoaxial"
-
-    dados_view = {
-        "rota_grafico": rota_grafico,
-        "rota_informacoes": rota_informacoes,
-        "caminho_imagem": caminho_imagem,
-        "nome_arquivo_imagem": nome_arquivo_imagem,
-    }
-
-    return render_template("grafico_espessura_fixa.html", **dados_view)
+    return render_template("grafico_espessura_fixa.html", **dados_plotagem)
