@@ -23,21 +23,21 @@ class GraficoMuEpsilon(Grafico):
         try:
             dados = np.loadtxt(self._caminho_arquivo_txt)
         except Exception as e:
-            print(f"Erro ao ler arquivo txt para plotar mi e epsilon: {e}")
+            print(f"Erro ao ler arquivo txt para plotar mu e epsilon: {e}")
             raise
 
-        print("Extraindo dados de mi e epsilon")
+        print("Extraindo dados de mu e epsilon")
         frequencia = dados[:, 0]
         epsilon = dados[:, 1]
         epsilon_prime = dados[:, 2]
-        mi = dados[:, 3]
-        mi_prime = dados[:, 4]
+        mu = dados[:, 3]
+        mu_prime = dados[:, 4]
 
-        return frequencia, epsilon, epsilon_prime, mi, mi_prime
+        return frequencia, epsilon, epsilon_prime, mu, mu_prime
 
     def plotar_grafico(self):
-        frequencia, epsilon, epsilon_prime, mi, mi_prime = (
-            self._ler_dados_arquivo()
+        frequencia, epsilon, epsilon_prime, mu, mu_prime = (
+            self._ler_dados_arquivo_txt()
         )
 
         print("Iniciando plotagem do gráfico de permissividade elétrica")
@@ -56,8 +56,8 @@ class GraficoMuEpsilon(Grafico):
 
         print("Iniciando plotagem do gráfico de permeabilidade magnética")
         ax = fig.add_subplot(1, 2, 2)
-        plt.plot(frequencia, mi, label="\u00b5'")
-        plt.plot(frequencia, mi_prime, label="\u00b5''")
+        plt.plot(frequencia, mu, label="\u00b5'")
+        plt.plot(frequencia, mu_prime, label="\u00b5''")
         plt.xlabel(f"Frequência ({self._unidade_frequencia})")
         plt.ylabel("Permeabilidade Magnética Relativa (\u00b5\u1d63)")
         plt.title(
