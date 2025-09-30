@@ -2,13 +2,15 @@ from flask import Blueprint, render_template, request, session
 
 from src.models.grafico_espessura_dinamica import GraficoEspessuraDinamica
 
-plotar_rl_dinamico_bp = Blueprint(
-    "plotar_rl_dinamico", __name__, url_prefix="/grafico"
+plotar_rl_espessura_dinamica_bp = Blueprint(
+    "plotar_rl_espessura_dinamica", __name__, url_prefix="/grafico"
 )
 
 
-@plotar_rl_dinamico_bp.route("/rl-espessura-dinamica", methods=["GET", "POST"])
-def plotar_rl_dinamico():
+@plotar_rl_espessura_dinamica_bp.route(
+    "/rl-espessura-dinamica", methods=["GET", "POST"]
+)
+def plotar_rl_espessura_dinamica():
     espessura_amostra = float(request.form.get("espessura_amostra", 1.0))
 
     inicio_slider = float(request.form.get("inicio_slider", 0.1))
