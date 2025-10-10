@@ -65,7 +65,6 @@ class GraficoEspessuraFixa(GraficoReflectionLoss):
             "w",
             encoding="utf-8",
         ) as arquivo_dados_grafico:
-
             # Cabeçalho do arquivo enviado para download
             arquivo_dados_grafico.write(
                 f"Frequência({self._unidade_frequencia}) RL(dB)"
