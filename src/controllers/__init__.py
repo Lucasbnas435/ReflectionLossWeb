@@ -1,5 +1,6 @@
 from .baixar_rl_espessura_dinamica import baixar_rl_espessura_dinamica_bp
 from .baixar_rl_espessura_fixa import baixar_rl_espessura_fixa_bp
+from .baixar_rl_espessura_variavel import baixar_rl_espessura_variavel_bp
 from .enviar_arquivo import enviar_arquivo_bp
 from .home import home_bp
 from .informacoes import informacoes_bp
@@ -10,6 +11,7 @@ from .plotar_rl_espessura_variavel import plotar_rl_espessura_variavel_bp
 
 
 def register_controllers(app):
+    app.register_blueprint(baixar_rl_espessura_variavel_bp)
     app.register_blueprint(baixar_rl_espessura_dinamica_bp)
     app.register_blueprint(baixar_rl_espessura_fixa_bp)
     app.register_blueprint(enviar_arquivo_bp)
