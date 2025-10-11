@@ -58,7 +58,9 @@ class DadosVna:
 
     def ler_csv(self):
         try:
-            with open(self.__caminho_arquivo_csv, "r") as arquivo_csv:
+            with open(
+                self.__caminho_arquivo_csv, "r", encoding="utf-8"
+            ) as arquivo_csv:
                 conteudo_arquivo_csv = arquivo_csv.readlines()
         except Exception as e:
             print(f"Erro ao ler o arquivo csv: {e}")
@@ -88,10 +90,11 @@ class DadosVna:
             self.__nome_banda = "Banda Ka"
 
     def gerar_arquivo_txt(self):
-        with open(self.__caminho_arquivo_csv, "r") as csv_file:
+        with open(
+            self.__caminho_arquivo_csv, "r", encoding="utf-8"
+        ) as csv_file:
             with open(
-                self.__caminho_arquivo_txt,
-                "w",
+                self.__caminho_arquivo_txt, "w", encoding="utf-8"
             ) as txt_file:
                 conteudo_csv = csv.reader(csv_file)
 
