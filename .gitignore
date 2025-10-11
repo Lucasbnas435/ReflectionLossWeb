@@ -6,6 +6,9 @@ __pycache__/
 src/static/files/saidas/*
 !src/static/files/saidas/.gitkeep
 
+src/static/files/zip_gerado/*
+!src/static/files/zip_gerado/.gitkeep
+
 src/static/files/txt_gerado/*
 !src/static/files/txt_gerado/.gitkeep
 
