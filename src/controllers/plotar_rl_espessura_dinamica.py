@@ -13,6 +13,9 @@ plotar_rl_espessura_dinamica_bp = Blueprint(
 def plotar_rl_espessura_dinamica():
     espessura_amostra = float(request.form.get("espessura_amostra", 1.0))
 
+    # Armazena na sessão para que a rota de baixar dados possa usar os valores
+    session["espessura_amostra"] = espessura_amostra
+
     inicio_slider = float(request.form.get("inicio_slider", 0.1))
     fim_slider = float(request.form.get("fim_slider", 10.0))
 

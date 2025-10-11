@@ -1,4 +1,4 @@
-from flask import Blueprint, request, send_file, session
+from flask import Blueprint, send_file, session
 
 from src.models.grafico_espessura_dinamica import GraficoEspessuraDinamica
 
@@ -11,7 +11,7 @@ baixar_rl_espessura_dinamica_bp = Blueprint(
     "/rl-espessura-dinamica/baixar-dados", methods=["GET", "POST"]
 )
 def baixar_rl_espessura_dinamica():
-    espessura_amostra = float(request.form.get("espessura_amostra", 1.0))
+    espessura_amostra = float(session.get("espessura_amostra", 1.0))
 
     grafico_espessura_dinamica = GraficoEspessuraDinamica(
         nome_arquivo_csv=session.get("nome_arquivo_csv", ""),
