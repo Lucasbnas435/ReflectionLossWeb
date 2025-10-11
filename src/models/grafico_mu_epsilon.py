@@ -76,3 +76,27 @@ class GraficoMuEpsilon(Grafico):
         }
 
         return dados_plotagem
+
+    def baixar_dados_grafico(self):
+        pasta_arquivo = f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{self._identificador_arquivo}"
+        os.makedirs(pasta_arquivo, exist_ok=True)
+
+        caminho_arquivo = (
+            f"{pasta_arquivo}/mu_epsilon_{self._identificador_arquivo}.txt"
+        )
+
+        with open(
+            self._caminho_arquivo_txt, "r", encoding="utf-8"
+        ) as arquivo_txt_original:
+            linhas = arquivo_txt_original.readlines()
+
+        with open(
+            caminho_arquivo, "w", encoding="utf-8"
+        ) as arquivo_dados_grafico:
+            # Cabeçalho do arquivo enviado para download
+            arquivo_dados_grafico.write(
+                f"F({self._unidade_frequencia})\t    e'\t\t    e''\t\t    mu'\t\t    mu''\n"
+            )
+            arquivo_dados_grafico.writelines(linhas)
+
+        return caminho_arquivo

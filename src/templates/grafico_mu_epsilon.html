@@ -3,11 +3,17 @@
 {% block title %}Gráfico - VNA{% endblock %}
 
 {% block content %}
-<form action="/informacoes" method="post">
-<button type="submit">Retornar ao menu</button>
-</form>
+    <form action="/informacoes" method="post">
+    <button type="submit">Retornar ao menu</button>
+    </form>
 
-<div class="grafico-container">
-    <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}">
-</div>
+    <div class="grafico-container">
+        <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}">
+    </div>
+
+    <div class="controles-grafico">
+        <form action="/grafico/mu-epsilon/baixar-dados" method="post">
+            <button type="submit">Baixar dados do gráfico</button>
+        </form>
+    </div>
 {% endblock %}
