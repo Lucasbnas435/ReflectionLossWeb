@@ -6,7 +6,7 @@
     <form action="/informacoes" method="post">
         <button type="submit">Retornar ao menu</button>
     </form>
-    <div class="grafico-container">
+    <div id="grafico" class="grafico-container">
         <img src="{{ url_for('static', filename='images/graficos_gerados/' + nome_arquivo_imagem) }}?t={{ timestamp }}">
     </div>
 
@@ -15,7 +15,7 @@
             <button type="submit">Baixar dados do gráfico</button>
         </form>
 
-        <form action="/grafico/rl-espessura-dinamica" method="post">
+        <form action="/grafico/rl-espessura-dinamica#grafico" method="post">
             <div class="campo-input">
                 Espessura mínima em mm: <input type="number" name="inicio_slider" step="any" value="{{ inicio_slider }}" required="true">
             </div>
