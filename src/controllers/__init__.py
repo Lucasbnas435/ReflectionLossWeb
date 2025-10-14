@@ -1,3 +1,4 @@
+from .baixar_arquivo_exemplo import baixar_arquivo_exemplo_bp
 from .baixar_mu_epsilon import baixar_mu_epsilon_bp
 from .baixar_rl_espessura_dinamica import baixar_rl_espessura_dinamica_bp
 from .baixar_rl_espessura_fixa import baixar_rl_espessura_fixa_bp
@@ -12,6 +13,7 @@ from .plotar_rl_espessura_variavel import plotar_rl_espessura_variavel_bp
 
 
 def register_controllers(app):
+    app.register_blueprint(baixar_arquivo_exemplo_bp)
     app.register_blueprint(baixar_mu_epsilon_bp)
     app.register_blueprint(baixar_rl_espessura_variavel_bp)
     app.register_blueprint(baixar_rl_espessura_dinamica_bp)

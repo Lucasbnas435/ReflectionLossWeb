@@ -14,5 +14,12 @@
             {{form.file()}}
             {{form.submit()}}
         </form>
+
+        <h4>
+            Para baixar o arquivo de exemplo,
+            <a href="{{ url_for('baixar_arquivo_exemplo.baixar_arquivo_exemplo') }}" class="link-download">
+                clique aqui
+            </a>
+        </h4>
     </div>
 {% endblock %}
