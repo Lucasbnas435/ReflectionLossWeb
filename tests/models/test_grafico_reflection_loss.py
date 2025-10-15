@@ -5,7 +5,7 @@ import pytest
 from src.models.grafico_reflection_loss import GraficoReflectionLoss
 
 FIXTURE_DIR = os.path.join(os.path.dirname(__file__), "..", "fixtures")
-SAMPLE_FILE = os.path.join(FIXTURE_DIR, "exemplo_txt.txt")
+SAMPLE_FILE = os.path.join(FIXTURE_DIR, "files", "txt_gerado", "mm_dummy.txt")
 
 
 # Subclasse concreta temporária para testes
