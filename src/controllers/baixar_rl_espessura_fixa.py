@@ -11,6 +11,7 @@ baixar_rl_espessura_fixa_bp = Blueprint(
     "/rl-espessura-fixa/baixar-dados", methods=["GET", "POST"]
 )
 def baixar_rl_espessura_fixa():
+    print("Iniciando download dos dados de RL para espessura fixa.")
     espessura_amostra = session.get("espessura_amostra", 1.0)
 
     grafico_espessura_fixa = GraficoEspessuraFixa(

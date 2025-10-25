@@ -39,12 +39,16 @@ class GraficoReflectionLoss(Grafico, ABC):
         Returns:
             list[str]: Lista em que cada elemento é uma linha do arquivo txt.
         """
+        print(
+            "Lendo dados do arquivo txt para cálculo da Perda por Reflexão (RL)."
+        )
         with open(self._caminho_arquivo_txt, "r") as arquivo_txt:
             return arquivo_txt.readlines()
 
     def _calcular_rl(
         self, conteudo_arquivo_txt: list[str], espessura_amostra: float
     ) -> tuple[list[float], list[float]]:
+        print("Iniciando cálculo da Perda por Reflexão (RL).")
         # Ajuste da Referencia de L1 e L2
         # [m] Espessura da amostra (Livro chama de L)
         d = espessura_amostra * 1e-3
@@ -105,6 +109,7 @@ class GraficoReflectionLoss(Grafico, ABC):
             )  # [dB] somente para voltagem
             s11_v.append(round(db, 5))
 
+        print("Cálculo da Perda por Reflexão (RL) finalizado.")
         return frequencias_plotagem, s11_v
 
     @abstractmethod

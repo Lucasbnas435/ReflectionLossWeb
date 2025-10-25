@@ -20,6 +20,7 @@ class GraficoEspessuraDinamica(GraficoReflectionLoss):
             espessura_amostra=espessura_amostra,
         )
 
+        print("Gerando gráfico de perda por reflexão com espessura dinâmica.")
         fig = plt.figure(figsize=(10, 5))
         plt.plot(frequencias_plotagem, s11_v, label=str(espessura_amostra))
         plt.legend(title="Espessura (mm)")
@@ -33,6 +34,7 @@ class GraficoEspessuraDinamica(GraficoReflectionLoss):
 
         caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/graficos_gerados/{nome_arquivo_imagem}"
         fig.savefig(caminho_imagem)
+        print("Gráfico de espessura dinâmica gerado com sucesso.")
 
         dados_plotagem = {
             "caminho_imagem": caminho_imagem,
@@ -42,13 +44,15 @@ class GraficoEspessuraDinamica(GraficoReflectionLoss):
             "inicio_slider": inicio_slider,
             "fim_slider": fim_slider,
         }
-
         return dados_plotagem
 
     def baixar_dados_grafico(
         self,
         espessura_amostra: float = 1.0,
     ):
+        print(
+            "Gerando arquivo com dados do gráfico de espessura dinâmica para download."
+        )
         pasta_arquivo = f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{self._identificador_arquivo}"
         os.makedirs(pasta_arquivo, exist_ok=True)
 
@@ -73,5 +77,7 @@ class GraficoEspessuraDinamica(GraficoReflectionLoss):
 
             for frequencia, rl in zip(frequencias_plotagem, s11_v):
                 arquivo_dados_grafico.write(f"\n{frequencia:.6f}\t{rl:.2f}")
-
+        print(
+            "Arquivo com dados do gráfico de espessura dinâmica gerado com sucesso."
+        )
         return caminho_arquivo

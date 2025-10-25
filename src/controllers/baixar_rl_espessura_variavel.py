@@ -12,6 +12,7 @@ baixar_rl_espessura_variavel_bp = Blueprint(
     "/rl-espessura-variavel/baixar-dados", methods=["GET", "POST"]
 )
 def baixar_rl_espessura_variavel():
+    print("Iniciando download dos dados de RL para espessura variável.")
     identificador_arquivo = session.get("identificador_arquivo", "")
 
     grafico_espessura_variavel = GraficoEspessuraVariavel(

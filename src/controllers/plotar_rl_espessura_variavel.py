@@ -11,6 +11,7 @@ plotar_rl_espessura_variavel_bp = Blueprint(
     "/rl-espessura-variavel", methods=["GET", "POST"]
 )
 def plotar_rl_espessura_variavel():
+    print("Rota para plotagem do gráfico de espessura variável acessada.")
     inicio = float(request.form.get("inicio", 0.1))
     fim = float(request.form.get("fim", 10.0))
     passo = float(request.form.get("passo", 1.0))

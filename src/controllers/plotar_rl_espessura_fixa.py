@@ -11,6 +11,7 @@ plotar_rl_espessura_fixa_bp = Blueprint(
     "/rl-espessura-fixa", methods=["GET", "POST"]
 )
 def plotar_rl_espessura_fixa():
+    print("Rota para plotagem do gráfico de espessura fixa acessada.")
     grafico_espessura_fixa = GraficoEspessuraFixa(
         nome_arquivo_csv=session.get("nome_arquivo_csv", ""),
         caminho_arquivo_txt=session.get("caminho_arquivo_txt", ""),

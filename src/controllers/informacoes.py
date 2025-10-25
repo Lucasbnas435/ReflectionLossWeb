@@ -20,4 +20,7 @@ def informacoes():
         "power": session.get("power", ""),
         "nome_banda": session.get("nome_banda", ""),
     }
+    print(
+        f"Informações do arquivo extraídas da sessão: {informacoes_extraidas}"
+    )
     return render_template("tela_informacoes.html", **informacoes_extraidas)

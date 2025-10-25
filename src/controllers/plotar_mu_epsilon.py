@@ -9,6 +9,7 @@ plotar_mu_epsilon_bp = Blueprint(
 
 @plotar_mu_epsilon_bp.route("/mu-epsilon", methods=["GET", "POST"])
 def plotar_mu_epsilon():
+    print("Rota para plotagem do gráfico de mu e epsilon acessada.")
     grafico_mu_epsilon = GraficoMuEpsilon(
         nome_arquivo_csv=session.get("nome_arquivo_csv", ""),
         caminho_arquivo_txt=session.get("caminho_arquivo_txt", ""),

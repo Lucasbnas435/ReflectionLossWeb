@@ -11,6 +11,7 @@ baixar_rl_espessura_dinamica_bp = Blueprint(
     "/rl-espessura-dinamica/baixar-dados", methods=["GET", "POST"]
 )
 def baixar_rl_espessura_dinamica():
+    print("Iniciando download dos dados de RL para espessura dinâmica.")
     espessura_amostra = float(session.get("espessura_amostra", 1.0))
 
     grafico_espessura_dinamica = GraficoEspessuraDinamica(

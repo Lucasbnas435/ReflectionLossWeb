@@ -30,6 +30,7 @@ class GraficoEspessuraFixa(GraficoReflectionLoss):
             espessura_amostra=self._espessura_amostra,
         )
 
+        print("Gerando gráfico de perda por reflexão com espessura fixa.")
         fig = plt.figure(figsize=(10, 5))
         plt.plot(
             frequencias_plotagem, s11_v, label=str(self._espessura_amostra)
@@ -45,15 +46,18 @@ class GraficoEspessuraFixa(GraficoReflectionLoss):
 
         caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/graficos_gerados/{nome_arquivo_imagem}"
         fig.savefig(caminho_imagem)
+        print("Gráfico de espessura fixa gerado com sucesso.")
 
         dados_plotagem = {
             "caminho_imagem": caminho_imagem,
             "nome_arquivo_imagem": nome_arquivo_imagem,
         }
-
         return dados_plotagem
 
     def baixar_dados_grafico(self):
+        print(
+            "Gerando arquivo com dados do gráfico de espessura fixa para download."
+        )
         pasta_arquivo = f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{self._identificador_arquivo}"
         os.makedirs(pasta_arquivo, exist_ok=True)
 
@@ -78,4 +82,7 @@ class GraficoEspessuraFixa(GraficoReflectionLoss):
             for frequencia, rl in zip(frequencias_plotagem, s11_v):
                 arquivo_dados_grafico.write(f"\n{frequencia:.6f}\t{rl:.2f}")
 
+        print(
+            "Arquivo com dados do gráfico de espessura fixa gerado com sucesso."
+        )
         return caminho_arquivo

@@ -20,6 +20,7 @@ class GraficoMuEpsilon(Grafico):
         self._identificador_arquivo = identificador_arquivo
 
     def _ler_dados_arquivo_txt(self) -> tuple:
+        print("Lendo dados do arquivo txt para plotar mu e epsilon.")
         try:
             dados = np.loadtxt(self._caminho_arquivo_txt)
         except Exception as e:
@@ -78,6 +79,9 @@ class GraficoMuEpsilon(Grafico):
         return dados_plotagem
 
     def baixar_dados_grafico(self):
+        print(
+            "Gerando arquivo com dados do gráfico de permeabilidade magnética e permissividade elétrica para download."
+        )
         pasta_arquivo = f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{self._identificador_arquivo}"
         os.makedirs(pasta_arquivo, exist_ok=True)
 
@@ -99,4 +103,7 @@ class GraficoMuEpsilon(Grafico):
             )
             arquivo_dados_grafico.writelines(linhas)
 
+        print(
+            "Arquivo com dados do gráfico de permeabilidade magnética e permissividade elétrica gerado com sucesso."
+        )
         return caminho_arquivo

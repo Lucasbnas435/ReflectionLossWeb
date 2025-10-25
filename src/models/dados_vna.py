@@ -61,7 +61,9 @@ class DadosVna:
             with open(
                 self.__caminho_arquivo_csv, "r", encoding="utf-8"
             ) as arquivo_csv:
+                print("Iniciando leitura do arquivo csv.")
                 conteudo_arquivo_csv = arquivo_csv.readlines()
+                print("Arquivo csv lido com sucesso.")
         except Exception as e:
             print(f"Erro ao ler o arquivo csv: {e}")
 
@@ -88,14 +90,17 @@ class DadosVna:
             self.__nome_banda = "Banda K"
         if self.__frequencia_inicial >= 26 and self.__frequencia_final <= 40:
             self.__nome_banda = "Banda Ka"
+        print("Informações extraídas do arquivo csv com sucesso.")
 
     def gerar_arquivo_txt(self):
+        print("Iniciando geração do arquivo txt.")
         with open(
             self.__caminho_arquivo_csv, "r", encoding="utf-8"
         ) as csv_file:
             with open(
                 self.__caminho_arquivo_txt, "w", encoding="utf-8"
             ) as txt_file:
+
                 conteudo_csv = csv.reader(csv_file)
 
                 # Pula as 15 primeiras linhas, que são o cabeçalho do arquivo
@@ -107,3 +112,4 @@ class DadosVna:
                 # Formata o conteudo do arquivo csv e escreve no txt
                 for row in linhas_conteudo_csv[:-1]:
                     txt_file.write("\t".join(row).strip() + "\n")
+        print("Arquivo txt gerado com sucesso.")

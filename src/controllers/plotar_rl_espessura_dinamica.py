@@ -11,6 +11,7 @@ plotar_rl_espessura_dinamica_bp = Blueprint(
     "/rl-espessura-dinamica", methods=["GET", "POST"]
 )
 def plotar_rl_espessura_dinamica():
+    print("Rota para plotagem do gráfico de espessura dinâmica acessada.")
     espessura_amostra = float(request.form.get("espessura_amostra", 1.0))
 
     # Armazena na sessão para que a rota de baixar dados possa usar os valores

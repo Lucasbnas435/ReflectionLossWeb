@@ -19,9 +19,11 @@ enviar_arquivo_bp = Blueprint("enviar_arquivo", __name__)
 
 @enviar_arquivo_bp.route("/enviar-arquivo", methods=["GET", "POST"])
 def enviar_arquivo():
+    print("Rota para envio de arquivo acessada.")
     form = UploadFileForm()
 
     if form.validate_on_submit():
+        print("Arquivo recebido com sucesso.")
         arquivo = form.file.data
         identificador_arquivo = gerar_identificador()
         arquivo.save(

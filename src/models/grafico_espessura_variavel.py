@@ -13,6 +13,7 @@ class GraficoEspessuraVariavel(GraficoReflectionLoss):
     ):
         conteudo_arquivo_txt = self._ler_dados_arquivo_txt()
 
+        print("Gerando gráfico de perda por reflexão com espessura variável.")
         fig = plt.figure(figsize=(10, 5))
 
         menor_rl_global = float("inf")
@@ -45,6 +46,7 @@ class GraficoEspessuraVariavel(GraficoReflectionLoss):
         )
         caminho_imagem = f"{os.getenv("STATIC_FOLDER_PATH")}/images/graficos_gerados/{nome_arquivo_imagem}"
         fig.savefig(caminho_imagem)
+        print("Gráfico de espessura variável gerado com sucesso.")
 
         dados_plotagem = {
             "espessura_menor_rl": espessura_menor_rl,
@@ -52,7 +54,6 @@ class GraficoEspessuraVariavel(GraficoReflectionLoss):
             "nome_arquivo_imagem": nome_arquivo_imagem,
             "timestamp": datetime.now().timestamp(),  # usado para cache busting
         }
-
         return dados_plotagem
 
     def baixar_dados_grafico(
@@ -61,6 +62,9 @@ class GraficoEspessuraVariavel(GraficoReflectionLoss):
         fim: float = 10.0,
         passo: float = 1.0,
     ):
+        print(
+            "Gerando arquivo com dados do gráfico de espessura variável para download."
+        )
         pasta_arquivos_saida = f"{os.getenv("STATIC_FOLDER_PATH")}/files/saidas/saidas_{self._identificador_arquivo}"
         os.makedirs(pasta_arquivos_saida, exist_ok=True)
 
@@ -111,4 +115,7 @@ class GraficoEspessuraVariavel(GraficoReflectionLoss):
                     "  ".join(f"{v:.6f}" for v in valores) + "\n"
                 )
 
+        print(
+            "Arquivo com dados do gráfico de espessura variável gerado com sucesso."
+        )
         return pasta_arquivos_saida

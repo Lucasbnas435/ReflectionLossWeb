@@ -11,6 +11,7 @@ baixar_mu_epsilon_bp = Blueprint(
     "/mu-epsilon/baixar-dados", methods=["GET", "POST"]
 )
 def baixar_mu_epsilon():
+    print("Iniciando download dos dados de mu e epsilon.")
     identificador_arquivo = session.get("identificador_arquivo", "")
 
     grafico_mu_epsilon = GraficoMuEpsilon(

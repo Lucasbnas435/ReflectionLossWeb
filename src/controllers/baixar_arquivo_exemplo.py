@@ -11,6 +11,7 @@ baixar_arquivo_exemplo_bp = Blueprint(
     "/baixar-arquivo-exemplo", methods=["GET", "POST"]
 )
 def baixar_arquivo_exemplo():
+    print("Retornando arquivo de exemplo.")
     return send_file(
         f"{os.getenv("STATIC_FOLDER_PATH")}/files/exemplos/exemplo.csv",
         as_attachment=True,
